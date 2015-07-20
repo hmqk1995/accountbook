@@ -1,0 +1,32 @@
+/** 定位元素相对父容器的绝对居中 **/
+@mixin abs-middle($margin-left, $margin-top){
+	top: 50%;
+	left: 50%;
+	margin-top: $margin-top;
+	margin-left: $margin-left;
+}
+
+h1,h2,h3,h4,h5,h6 {margin: 0;}
+body {
+	font-family: "微软雅黑";
+}
+
+#main_container {
+	position: relative;
+	.nav_bar {
+		$height: 50px; // 整个navbar高度
+
+		position: absolute;
+		width: 100%;
+		background-color: #8ed498;
+		height: $height;
+		padding: 10px auto;
+		h2 {
+			font-size: 24px;
+			position: absolute;
+			@include abs-middle(-36px, -12px);
+			color: #fff;
+			height: $height;
+		}
+	}
+}
