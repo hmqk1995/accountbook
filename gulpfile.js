@@ -22,9 +22,14 @@ gulp.task('sass', function() {
 
 // 处理html文件
 gulp.task('html', function() {
+	//载入html
 	gulp.src('./src/*.html')
 	  .pipe(gulp.dest('./dist/'));
-	  gulp.src('./src/css/*.css')
+	//载入字体
+	gulp.src('./src/fonts/*.*')
+	  .pipe(gulp.dest('./dist/fonts/'));
+	//载入除了sass的css
+	gulp.src('./src/css/*.css')
     .pipe(minifyCss())
     .pipe(gulp.dest('./dist/css/'));
 });

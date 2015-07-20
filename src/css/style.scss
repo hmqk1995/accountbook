@@ -6,27 +6,75 @@
 	margin-left: $margin-left;
 }
 
+/** 引入字体 **/
+@font-face {
+	font-family: "my-icon";
+	src: url('../fonts/icomoon.eot') format('eot');
+	src: url('../fonts/icomoon.woff') format('woff'), 
+		url('../fonts/icomoon.ttf') format('truetype'),
+		url('../fonts/icomoon.svg') format('svg');
+}
+
 h1,h2,h3,h4,h5,h6 {margin: 0;}
+ul,li{margin: 0; padding: 0;}
 body {
 	font-family: "微软雅黑";
+	position: relative;
 }
 
 #main_container {
-	position: relative;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	height: 0;
+		$height: 70px; // 整个navbar高度
+		$bgcolor: #8ed498;
+		$txt_color: #fff;
+	//大导航
 	.nav_bar {
-		$height: 50px; // 整个navbar高度
-
 		position: absolute;
 		width: 100%;
-		background-color: #8ed498;
+		background-color: $bgcolor;
 		height: $height;
 		padding: 10px auto;
 		h2 {
-			font-size: 24px;
+			font-weight: normal;
+			font-size: 22px;
 			position: absolute;
-			@include abs-middle(-36px, -12px);
-			color: #fff;
-			height: $height;
+			@include abs-middle(-33px, -11px);
+			color: $txt_color;
+			height: 30px;
+		}
+
+		a {
+			&.icon {color: $txt_color;}
+			&.icon-list, &.icon-edit {
+				font-size: 30px;
+				padding: 20px;
+				position: absolute;
+				width: 30px;
+				height: 30px;
+			}
+			&.icon-list {left:  0;}
+			&.icon-edit {right: 0;}
 		}
 	}
+	//大导航下部分
+	ul.nav_bar_more {height: 50px; display: table; width: 100%; text-align: center;}
+	.nav_bar_more {
+		position: absolute;
+		top: 100%;
+		li  {display: table-cell; vertical-align: middle;}
+		background: rgba(142, 212, 152, 0.8);
+		color: $txt_color;
+	}
+}
+
+#container {
+	
+}
+
+//icon类
+.icon {
+	font-family: "my-icon";
 }
