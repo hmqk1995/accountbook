@@ -1,0 +1,21 @@
+// 定位元素相对父容器的绝对居中
+@mixin abs-middle ($margin-left, $margin-top) {
+	top: 50%;
+	left: 50%;
+	margin-top: $margin-top;
+	margin-left: $margin-left;
+}
+
+// 设置并生成记账列表icon图标、背景颜色
+@mixin list-icon (
+		$size: 40px,
+		$radius: 20px, //设置为size的一半
+		$font-size: 25px
+	) {
+	width: $size;
+	height: $size;
+	font-size: $font-size;
+	line-height: $size;
+	text-align: center;
+	border-radius: $radius;
+}

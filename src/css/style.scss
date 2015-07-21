@@ -1,10 +1,4 @@
-/** 定位元素相对父容器的绝对居中 **/
-@mixin abs-middle($margin-left, $margin-top){
-	top: 50%;
-	left: 50%;
-	margin-top: $margin-top;
-	margin-left: $margin-left;
-}
+@import 'lib';
 
 /** 引入字体 **/
 @font-face {
@@ -21,15 +15,18 @@ body {
 	font-family: "微软雅黑";
 	position: relative;
 }
+i{font-style: normal;}
 
+$height: 70px; // 整个navbar高度
+$txt_color: #fff; //icon色彩
+$txt_color_grey: #636363; //主list偏灰色
 #main_container {
+	translate3d: (0, 0, 0);
 	position: fixed;
 	width: 100%;
 	top: 0;
 	height: 0;
-		$height: 70px; // 整个navbar高度
-		$bgcolor: #8ed498;
-		$txt_color: #fff;
+		$bgcolor: #7dba57;
 	//大导航
 	.nav_bar {
 		position: absolute;
@@ -48,15 +45,15 @@ body {
 
 		a {
 			&.icon {color: $txt_color;}
-			&.icon-list, &.icon-edit {
+			&.icon_list, &.icon_edit {
 				font-size: 30px;
 				padding: 20px;
 				position: absolute;
 				width: 30px;
 				height: 30px;
 			}
-			&.icon-list {left:  0;}
-			&.icon-edit {right: 0;}
+			&.icon_list {left:  0;}
+			&.icon_edit {right: 0;}
 		}
 	}
 	//大导航下部分
@@ -65,16 +62,59 @@ body {
 		position: absolute;
 		top: 100%;
 		li  {display: table-cell; vertical-align: middle;}
-		background: rgba(142, 212, 152, 0.8);
+		background: rgba(125, 186, 87, 0.8);
 		color: $txt_color;
 	}
 }
 
 #container {
-	
+	margin-top: $height;
+	ul {
+		li {
+			width: 100%;
+			line-height: 40px;
+			display: table;
+			padding-top: 20px;
+			padding-bottom: 20px;
+			border-bottom: 1px dashed #abbeae;
+			span {
+				display: table-cell;
+				vertical-align: middle;
+				font-size: 22px;
+				display: inline-block;
+				&.icon {
+					margin-left: 20px;
+					color: $txt_color; 
+					@include list-icon();
+				}
+				&.account_item_txt {
+					color: $txt_color_grey;
+					margin-left: 20px;
+				}
+				&.count {
+					padding: 0 20px;
+				}
+			}
+		}
+	}
 }
 
 //icon类
 .icon {
+	-webkit-font-smoothing: antialiased;
 	font-family: "my-icon";
+	&.icon_green  {background: #93dcb7;}
+	&.icon_orange {background: #f39f61;}
+	&.icon_pink   {background: #fe8887;}
+	&.icon_blue   {background: #6fb2de;}
+	&.icon_red    {background: #d9594b;}
+	&.icon_brown  {background: #c6b29c;}
+}
+
+//收入类
+.add {
+	color: #7dba57;
+}
+.minus {
+	color: #db6b61;
 }
