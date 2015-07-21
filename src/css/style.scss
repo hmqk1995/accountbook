@@ -12,7 +12,7 @@
 h1,h2,h3,h4,h5,h6 {margin: 0;}
 ul,li{margin: 0; padding: 0;}
 body {
-	font-family: "微软雅黑";
+	font-family: "微软雅黑", "Microsoft-Yahei", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Helvetica";
 	position: relative;
 }
 i{font-style: normal;}
@@ -74,8 +74,8 @@ $txt_color_grey: #636363; //主list偏灰色
 			width: 100%;
 			line-height: 40px;
 			display: table;
-			padding-top: 20px;
-			padding-bottom: 20px;
+			padding-top: 10px;
+			padding-bottom: 10px;
 			border-bottom: 1px dashed #abbeae;
 			span {
 				display: table-cell;
