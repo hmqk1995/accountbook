@@ -103,6 +103,8 @@ $txt_color_grey: #636363; //主list偏灰色
 .icon {
 	-webkit-font-smoothing: antialiased;
 	font-family: "my-icon";
+	tap-highlight-color: transparent;
+  	-webkit-tap-highlight-color: transparent;
 	&.icon_green  {background: #93dcb7;}
 	&.icon_orange {background: #f39f61;}
 	&.icon_pink   {background: #fe8887;}
