@@ -70,7 +70,7 @@ $txt_color_grey: #636363; //主list偏灰色
 #container {
 	margin-top: $height;
 	ul {
-		li:nth-child(2n+1) {background: #dedede;}
+		li:nth-child(2n+1) {background: #f2f2f2;}
 		li {
 			width: 100%;
 			line-height: 40px;
