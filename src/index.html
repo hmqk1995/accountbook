@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="main_container">
-		<nav class="nav_bar">
+		<nav class="nav_bar" style="display:none;">
 			<h2>记帐本</h2>
 			<a class="icon icon_list" href="#">&#xe607;</a>
 			<a class="icon icon_edit" href="#">&#xe609;</a>
@@ -22,7 +22,7 @@
 				<li>帐目图表</li>
 			</ul>
 		</nav>
-		<div id="container">
+		<div id="container" style="display:none;">
 			<section class="account_list">
 				<ul>
 					<li class="account_item">
@@ -38,6 +38,44 @@
 				</ul>
 			</section>
 		</div>
+
+		<section class="account_addone">
+			<nav class="nav_bar">
+				<h2>记一笔钱</h2>
+				<a class="icon icon_close" href="#">&#xe600;</a>
+				<a class="icon icon_publish" href="#">发布</a>
+			</nav>
+			<section class="account_list">
+				<span class="icon icon_blue">&#xe611;<i>收入</i></span>
+				<span class="icon icon_blue">&#xe612;<i>衣服</i></span>
+				<hr />
+				<span class="icon icon_blue">&#xe613;<i>交通</i></span>
+			</section>
+			<section class="account_input">
+				<div class="input_show">
+					<span class="icon icon_blue">&#xe612;<i>衣服</i></span>
+					<span class="input_mount">¥ 776.50</span>
+				</div>
+				<div class="calculator">
+					<i>1</i>
+					<i>2</i>
+					<i>3</i>
+					<i>x</i>
+					<i>4</i>
+					<i>5</i>
+					<i>6</i>
+					<i>+</i>
+					<i>7</i>
+					<i>8</i>
+					<i>9</i>
+					<i>-</i>
+					<i>C</i>
+					<i>0</i>
+					<i>.</i>
+					<i>=</i>
+				</div>
+			</section>
+		</section>
 	</div>
 </body>
 </html>

@@ -17,7 +17,7 @@ body {
 }
 i{font-style: normal;}
 
-$height: 70px; // 整个navbar高度
+$height: 60px; // 整个navbar高度
 $txt_color: #fff; //icon色彩
 $txt_color_grey: #636363; //主list偏灰色
 #main_container {
@@ -47,7 +47,7 @@ $txt_color_grey: #636363; //主list偏灰色
 			&.icon {color: $txt_color;}
 			&.icon_list, &.icon_edit {
 				font-size: 30px;
-				padding: 20px;
+				padding: 15px;
 				position: absolute;
 				width: 30px;
 				height: 30px;
@@ -65,6 +65,12 @@ $txt_color_grey: #636363; //主list偏灰色
 		background: rgba(125, 186, 87, 0.8);
 		color: $txt_color;
 	}
+	//记一笔钱
+	section.account_addone {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
 }
 
 #container {
@@ -73,7 +79,7 @@ $txt_color_grey: #636363; //主list偏灰色
 		li:nth-child(2n+1) {background: #f2f2f2;}
 		li {
 			width: 100%;
-			line-height: 40px;
+			// line-height: 40px;
 			display: table;
 			padding-top: 10px;
 			padding-bottom: 10px;
