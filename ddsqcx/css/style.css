@@ -435,6 +435,8 @@ a {
 #s5_code {
   z-index: 99999;
   position: absolute;
-  bottom: 0;
+  bottom: 4%;
+  width: 26%;
+  right: 10%;
 }
 
