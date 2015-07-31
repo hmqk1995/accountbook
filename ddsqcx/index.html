@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta content="telephone=no" name="format-detection" />
+	<link rel="stylesheet" href="css/style.css" />
+	<title>中国电影怎么“破”？</title>
+	<script type="text/javascript">
+		//图片预加载(只适用于本次全为png情况)
+		var pre_IMGPATH = 'images/';
+		var pre_TYPE = '.png';
+		var pre_imgArr  = ['orientation'];
+		for (var i=0,len=pre_imgArr.length;i<len;i++) {
+			pre_imgArr[i] = pre_IMGPATH + pre_imgArr[i] + pre_TYPE;
+		}
+		console.log(pre_imgArr);
+		var eventsConfig = {
+			'preLoadImgs' : pre_imgArr
+		};
+	</script>
+</head>
+<body onload="loaded()">
+	<div class="mask mask_loading">
+	    <div class="loading">	
+	        <img class="icon-loading" src="images/loading.gif" >
+	        <i class="icon-process">0%</i>
+	    </div>
+	</div>
+	<div id="container">
+		<div id="fullpage_wrap">
+			<div class="page page1">
+				<img id="logo" src="images/logo.png" />
+				<div class="page1_orange">
+					<div class="coaster">
+						<img id="whitetxt" src="images/whitetxt.png" />
+						<img id="train" src="images/train.png" />
+						<img id="cloud" src="images/cloud.png" />
+					</div>
+					<img class="page1_txt" id="page1_txt_1" src="images/t_1.png" />
+					<img class="page1_txt" id="page1_txt_2" src="images/t_2.png" />
+					<img class="page1_txt" id="page1_txt_3" src="images/t_3.png" />
+				</div>
+				<img class="arr" src="images/arr.png" />
+			</div>
+	        <div id="wrapper" class="page page2">
+	        	<div id="slider">
+		        	
+		        </div>
+	        </div>
+		</div>
+	</div>
+	<div class="orientation_set">
+    	<div>
+    		<img src="images/orientation.png" width="50" alt="" class='translate' />
+        	<br />请将屏幕竖向浏览
+    	</div>
+	</div>
+	<script type="text/javascript" src="javascripts/all.js"></script>
+	<script type="text/javascript">
+		$('#fullpage_wrap').fullpage({
+			drag: true,
+			afterChange: function (e) {
+                console.log('afterChange', e.next, e.cur);
+                if (e.cur == 1) {
+                	$.fn.fullpage.stop();
+                }
+            }
+		});
+		function loaded() {
+			var myScroll = new IScroll('#wrapper', {
+				scrollbars: true,
+				click: true
+			});
+
+			var URL= 'http://weixin.wepiao.com/huodong/wx/20150724/dynzpd';
+            var share_img_url = URL+'/images/share.jpg';
+            WxBridge.share({
+                'imgUrl' : share_img_url, // 图片地址
+                'link' : URL, // 链接地址
+                'title' : '中国电影怎么“破”？', // 分享标题
+                'desc' : '中国电影怎么“破”？2015半年数据全盘点' // 分享内容
+            });
+		}
+		//     google analytics
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+	    ga('create', 'UA-58583546-8', 'auto');
+	    ga('send', 'pageview');
+	</script>
+</body>
+</html>
