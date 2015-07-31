@@ -48,28 +48,29 @@
 	        	<div id="slider">
 		        	<section id="section_1">
 		        		<img src="images/s1.png" />
-		        		<a id="section_1_href1" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/87/index.html"></a>
-		        		<a id="section_1_href2" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/88/index.html"></a>
-		        		<a id="section_1_href3" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/89/index.html"></a>
-		        		<a id="section_1_href4" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/90/index.html"></a>
+		        		<a id="section_1_href1" class="section_1_href frombutton" href="http://promotion.wepiao.com/wx_activepage/87/index.html"></a>
+		        		<a id="section_1_href2" class="section_1_href frombutton" href="http://promotion.wepiao.com/wx_activepage/88/index.html"></a>
+		        		<a id="section_1_href3" class="section_1_href frombutton" href="http://promotion.wepiao.com/wx_activepage/89/index.html"></a>
+		        		<a id="section_1_href4" class="section_1_href frombutton" href="http://promotion.wepiao.com/wx_activepage/90/index.html"></a>
 		        	</section>
 		        	<section id="section_2">
 		        		<img id="s2_circle" src="images/s2_circle.png" />
 		        		<img id="s2_s2" src="images/s2.png" />
 		        		<img id="s2_ballon" src="images/s2_ballon.png" />
-		        		<a id="s2_button_a" href="http://mp.weixin.qq.com/s?__biz=MzAxMjUyMjEyMg==&mid=223001545&idx=1&sn=b8d5f05eac3ef9f44da490f530d159b1#rd"></a>
+		        		<a id="s2_button_a" class="frombutton" href="http://mp.weixin.qq.com/s?__biz=MzAxMjUyMjEyMg==&mid=223001545&idx=1&sn=b8d5f05eac3ef9f44da490f530d159b1#rd"></a>
 		        	</section>
 		        	<section id="section_3">
 		        		<img id="s3_s3" src="images/s3.png" />
-		        		<a id="s3_button_a" href="http://kdt.im/vjMLsOQrL"></a>
+		        		<a id="s3_button_a" class="frombutton" href="http://kdt.im/vjMLsOQrL"></a>
 		        		<img id="s3_button" src="images/s3_button.png" />
 		        	</section>
 		        	<section id="section_4">
 		        		<img id="s4_s4" src="images/s4.png" />
-		        		<a id="s4_button_a" href="http://wx.tongxinchina.cn/wechat/zjw/applys.jsp"></a>
+		        		<a id="s4_button_a" class="frombutton" href="http://wx.tongxinchina.cn/wechat/zjw/applys.jsp"></a>
 		        	</section>
 		        	<section id="section_5">
 		        		<img id="s5_s5" src="images/s5.png" />
+		        		<img id="s5_code" src="images/code.png" />
 		        	</section>
 		        </div>
 	        </div>
@@ -92,6 +93,23 @@
                 }
             }
 		});
+
+		//获取字符串
+		function _getQueryString(name) {
+	        var param = decodeURIComponent(window.location.search);
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+	        var r = param.substr(1).match(reg);
+	        if (r != null)
+	            return unescape(r[2]);
+	        return null;
+	    }
+	    //加入form值
+	    var fromId = _getQueryString('from');
+	    $('.frombutton').each(function(){
+	    	var href = $(this).attr('href'); 
+	    	$(this).attr('href', fromId ? (href + '?from=' + fromId) : href);
+	    });
+
 		function loaded() {
 			var myScroll = new IScroll('#wrapper', {
 				scrollbars: true,

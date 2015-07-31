@@ -432,5 +432,9 @@ a {
             height: 11%; }
         #fullpage_wrap .page2 #slider section#section_5 {
           background: #FFD285; }
-
+#s5_code {
+  z-index: 99999;
+  position: absolute;
+  bottom: 0;
+}
 
