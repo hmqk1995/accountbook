@@ -4,13 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta content="telephone=no" name="format-detection" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 	<link rel="stylesheet" href="css/style.css" />
-	<title>中国电影怎么“破”？</title>
+	<title>暑期二次园大冒险</title>
 	<script type="text/javascript">
 		//图片预加载(只适用于本次全为png情况)
 		var pre_IMGPATH = 'images/';
 		var pre_TYPE = '.png';
-		var pre_imgArr  = ['orientation'];
+		var pre_imgArr  = ['orientation','arr', 'bluetxt', 'cloud', 'coaster', 'logo', 's1', 's2', 's2_ballon', 's2_circle', 's3', 's3_button', 's4', 's5', 't_1', 't_2', 't_3', 'train', 'whitetxt'];
 		for (var i=0,len=pre_imgArr.length;i<len;i++) {
 			pre_imgArr[i] = pre_IMGPATH + pre_imgArr[i] + pre_TYPE;
 		}
@@ -45,7 +46,31 @@
 			</div>
 	        <div id="wrapper" class="page page2">
 	        	<div id="slider">
-		        	
+		        	<section id="section_1">
+		        		<img src="images/s1.png" />
+		        		<a id="section_1_href1" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/87/index.html"></a>
+		        		<a id="section_1_href2" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/88/index.html"></a>
+		        		<a id="section_1_href3" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/89/index.html"></a>
+		        		<a id="section_1_href4" class="section_1_href" href="http://promotion.wepiao.com/wx_activepage/90/index.html"></a>
+		        	</section>
+		        	<section id="section_2">
+		        		<img id="s2_circle" src="images/s2_circle.png" />
+		        		<img id="s2_s2" src="images/s2.png" />
+		        		<img id="s2_ballon" src="images/s2_ballon.png" />
+		        		<a id="s2_button_a" href="http://mp.weixin.qq.com/s?__biz=MzAxMjUyMjEyMg==&mid=223001545&idx=1&sn=b8d5f05eac3ef9f44da490f530d159b1#rd"></a>
+		        	</section>
+		        	<section id="section_3">
+		        		<img id="s3_s3" src="images/s3.png" />
+		        		<a id="s3_button_a" href="http://kdt.im/vjMLsOQrL"></a>
+		        		<img id="s3_button" src="images/s3_button.png" />
+		        	</section>
+		        	<section id="section_4">
+		        		<img id="s4_s4" src="images/s4.png" />
+		        		<a id="s4_button_a" href="http://wx.tongxinchina.cn/wechat/zjw/applys.jsp"></a>
+		        	</section>
+		        	<section id="section_5">
+		        		<img id="s5_s5" src="images/s5.png" />
+		        	</section>
 		        </div>
 	        </div>
 		</div>
@@ -73,13 +98,13 @@
 				click: true
 			});
 
-			var URL= 'http://weixin.wepiao.com/huodong/wx/20150724/dynzpd';
+			var URL= 'http://weixin.wepiao.com/huodong/wx/20150730/donghuadianyingerciyuan';
             var share_img_url = URL+'/images/share.jpg';
             WxBridge.share({
                 'imgUrl' : share_img_url, // 图片地址
                 'link' : URL, // 链接地址
-                'title' : '中国电影怎么“破”？', // 分享标题
-                'desc' : '中国电影怎么“破”？2015半年数据全盘点' // 分享内容
+                'title' : '二次园大冒险丨动画电影9元起抢票，原版周边免费赢', // 分享标题
+                'desc' : '二次园大冒险丨动画电影9元起抢票，原版周边免费赢' // 分享内容
             });
 		}
 		//     google analytics

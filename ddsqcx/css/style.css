@@ -110,15 +110,15 @@ img {
 	 使用gulp-autoprefixer结合构建，不再输入浏览器前缀  **/
 @-webkit-keyframes moveup {
   0% {
-    -webkit-transform: translate3d(0, 30px, 0);
-            transform: translate3d(0, 30px, 0); }
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0); }
   100% {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); } }
 @keyframes moveup {
   0% {
-    -webkit-transform: translate3d(0, 30px, 0);
-            transform: translate3d(0, 30px, 0); }
+    -webkit-transform: translate3d(0, 10px, 0);
+            transform: translate3d(0, 10px, 0); }
   100% {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); } }
@@ -174,12 +174,26 @@ img {
             transform: translate3d(0, -15px, 0); } }
 @-webkit-keyframes rotate {
   0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+@-webkit-keyframes rotateRoll {
+  0% {
     -webkit-transform: rotate(-160deg);
             transform: rotate(-160deg); }
   100% {
     -webkit-transform: rotate(200deg);
             transform: rotate(200deg); } }
-@keyframes rotate {
+@keyframes rotateRoll {
   0% {
     -webkit-transform: rotate(-160deg);
             transform: rotate(-160deg); }
@@ -191,8 +205,8 @@ img {
     -webkit-transform: scale3d(1, 1, 0);
             transform: scale3d(1, 1, 0); }
   50% {
-    -webkit-transform: scale3d(1.1, 1.1, 0);
-            transform: scale3d(1.1, 1.1, 0); }
+    -webkit-transform: scale3d(1.05, 1.05, 0);
+            transform: scale3d(1.05, 1.05, 0); }
   100% {
     -webkit-transform: scale3d(1, 1, 0);
             transform: scale3d(1, 1, 0); } }
@@ -201,8 +215,8 @@ img {
     -webkit-transform: scale3d(1, 1, 0);
             transform: scale3d(1, 1, 0); }
   50% {
-    -webkit-transform: scale3d(1.1, 1.1, 0);
-            transform: scale3d(1.1, 1.1, 0); }
+    -webkit-transform: scale3d(1.05, 1.05, 0);
+            transform: scale3d(1.05, 1.05, 0); }
   100% {
     -webkit-transform: scale3d(1, 1, 0);
             transform: scale3d(1, 1, 0); } }
@@ -222,48 +236,66 @@ img {
             transform: translate3d(50px, 0, 0); } }
 @-webkit-keyframes txtmove {
   0% {
-    -webkit-transform: translate3d(2px, 0, 0);
-            transform: translate3d(2px, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1; }
   100% {
-    -webkit-transform: translate3d(-3px, 0, 0);
-            transform: translate3d(-3px, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 0.7; } }
 @keyframes txtmove {
   0% {
-    -webkit-transform: translate3d(2px, 0, 0);
-            transform: translate3d(2px, 0, 0); }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 1; }
   100% {
-    -webkit-transform: translate3d(-3px, 0, 0);
-            transform: translate3d(-3px, 0, 0); } }
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+    opacity: 0.7; } }
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 #cloud {
   -webkit-animation: cloudmove linear 18s infinite alternate;
           animation: cloudmove linear 18s infinite alternate; }
 
 #whitetxt {
-  -webkit-animation: txtmove linear 8s infinite alternate;
-          animation: txtmove linear 8s infinite alternate; }
+  -webkit-animation: txtmove linear 1s infinite alternate;
+          animation: txtmove linear 1s infinite alternate; }
 
 #train {
-  -webkit-animation: rotate ease 3s infinite;
-          animation: rotate ease 3s infinite;
+  -webkit-animation: rotateRoll ease 3s infinite;
+          animation: rotateRoll ease 3s infinite;
   -webkit-transform-origin: 73% 54%;
       -ms-transform-origin: 73% 54%;
           transform-origin: 73% 54%; }
 
-#page1_txt_1 {
-  -webkit-animation: moveup ease-in 1s both;
-          animation: moveup ease-in 1s both; }
-
-#page1_txt_2 {
-  -webkit-animation: moveup 0.8s ease-in 1s both;
-          animation: moveup 0.8s ease-in 1s both; }
-
-#page1_txt_3 {
-  -webkit-animation: moveup 1.6s ease-out 2s both;
-          animation: moveup 1.6s ease-out 2s both; }
+#page1_txt_1, #page1_txt_2, #page1_txt_3 {
+  -webkit-animation: fadeIn linear 1.6s backwards;
+          animation: fadeIn linear 1.6s backwards; }
 
 .arr {
   -webkit-animation: txtup ease 1.4s infinite;
           animation: txtup ease 1.4s infinite; }
+
+#s2_circle {
+  -webkit-animation: rotate linear 8s infinite;
+          animation: rotate linear 8s infinite; }
+
+#s2_ballon {
+  -webkit-animation: moveup ease-in-out 1.5s infinite alternate;
+          animation: moveup ease-in-out 1.5s infinite alternate; }
+
+#s3_button {
+  -webkit-animation: pulse linear 1s infinite;
+          animation: pulse linear 1s infinite; }
 
 html, body {
   width: 100%;
@@ -279,7 +311,8 @@ a {
   overflow: hidden;
   width: 100%;
   height: 100%;
-  position: relative; }
+  position: relative;
+  background: #ffede4; }
 
 .mask_loading {
   z-index: 9999;
@@ -307,17 +340,18 @@ a {
     #fullpage_wrap .page1 #logo {
       position: absolute;
       top: 0;
-      width: 100%; }
+      width: 100%;
+      z-index: 999; }
     #fullpage_wrap .page1 .arr {
       position: absolute;
       width: 10%;
-      bottom: 10px;
+      bottom: 20px;
       left: 50%;
       margin-left: -5%; }
     #fullpage_wrap .page1 .page1_orange {
       padding-top: 30px;
       position: absolute;
-      background: #ff8162;
+      background: #ff7155;
       bottom: 0;
       width: 100%;
       height: 35%;
@@ -343,10 +377,60 @@ a {
           #fullpage_wrap .page1 .page1_orange .coaster img#cloud {
             bottom: 170px; }
   #fullpage_wrap .page2 {
-    background: #edefe4;
+    background: #ffd28c;
     position: relative; }
     #fullpage_wrap .page2 #slider {
       position: absolute;
       font-size: 0; }
+      #fullpage_wrap .page2 #slider section {
+        width: 100%;
+        position: relative; }
+        #fullpage_wrap .page2 #slider section#section_1 {
+          background: #ff7155; }
+          #fullpage_wrap .page2 #slider section#section_1 .section_1_href {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 4%; }
+          #fullpage_wrap .page2 #slider section#section_1 #section_1_href1 {
+            top: 35%; }
+          #fullpage_wrap .page2 #slider section#section_1 #section_1_href2 {
+            top: 54.2%; }
+          #fullpage_wrap .page2 #slider section#section_1 #section_1_href3 {
+            top: 73.4%; }
+          #fullpage_wrap .page2 #slider section#section_1 #section_1_href4 {
+            top: 92.6%; }
+        #fullpage_wrap .page2 #slider section#section_2 {
+          background: #92FFFF; }
+          #fullpage_wrap .page2 #slider section#section_2 #s2_s2 {
+            position: relative; }
+          #fullpage_wrap .page2 #slider section#section_2 #s2_ballon {
+            position: absolute;
+            top: 0; }
+          #fullpage_wrap .page2 #slider section#section_2 #s2_circle {
+            position: absolute;
+            top: 30.2%; }
+          #fullpage_wrap .page2 #slider section#section_2 #s2_button_a {
+            position: absolute;
+            bottom: 3.5%;
+            width: 100%;
+            height: 8%; }
+        #fullpage_wrap .page2 #slider section#section_3 {
+          background: #92FFFF; }
+          #fullpage_wrap .page2 #slider section#section_3 #s3_button, #fullpage_wrap .page2 #slider section#section_3 #s3_button_a {
+            position: absolute;
+            bottom: 38%; }
+          #fullpage_wrap .page2 #slider section#section_3 #s3_button_a {
+            width: 100%;
+            height: 45px; }
+        #fullpage_wrap .page2 #slider section#section_4 {
+          background: #FAFF85; }
+          #fullpage_wrap .page2 #slider section#section_4 #s4_button_a {
+            position: absolute;
+            bottom: 17.8%;
+            width: 100%;
+            height: 11%; }
+        #fullpage_wrap .page2 #slider section#section_5 {
+          background: #FFD285; }
 
 
