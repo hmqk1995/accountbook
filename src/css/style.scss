@@ -70,6 +70,66 @@ $txt_color_grey: #636363; //主list偏灰色
 		position: absolute;
 		top: 0;
 		width: 100%;
+		nav.nav_bar {background: #f8f8f8;}
+		nav.nav_bar h2,nav.nav_bar a.icon_close {color: #8b8b8b;}
+		a {
+			&.icon {color: $txt_color;}
+			&.icon_close {
+				font-size: 30px;
+				padding: 15px;
+				position: absolute;
+				width: 30px;
+				height: 30px;
+			}
+			&.icon_publish {
+				position: absolute;
+				line-height: 28px;
+				width: 60px;
+				height: 30px;
+				padding: 15px;
+				i {
+					display: inline-block;
+					height: 30px;
+					width: 60px;
+					text-align: center;
+					background: #8ed498;
+					border-radius: 12px;
+				}
+			}
+			&.icon_close {left:  0;}
+			&.icon_publish {right: 0;}
+		}
+		.account_list {
+			margin-top: $height;
+			.account_list_icon {
+				color: $txt_color_grey;
+				display: inline-block;
+				margin: 10px;
+				i {
+					width: 100%;
+					font-size: 16px;
+					display: block;
+					text-align: center;
+					margin-top: 2px;
+				}
+			}
+			span.icon {
+				border-radius: 60px;
+				display: block;
+				width: 60px;
+				height: 60px;
+				font-size: 30px;
+				line-height: 60px;
+				color: #fff;
+				text-align: center;
+			}
+			hr {
+				margin: 0 6px;
+				color: #d8d8d8;
+				border: none;
+				border-top: solid 1px;
+			}
+		}
 	}
 }
 
@@ -126,4 +186,23 @@ $txt_color_grey: #636363; //主list偏灰色
 }
 .minus {
 	color: #db6b61;
+}
+
+//计算器样式
+.calculator {
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	background: #eee;
+	color: #818181;
+	i {
+		float: left;
+		display: inline-block;
+		margin-left: -2px;
+		width: 25%;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		border: 1px solid #ccc;
+	}
 }

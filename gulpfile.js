@@ -51,7 +51,7 @@ gulp.task('default', ['sass', 'html'], function() {
     .pipe(uglify())
     .pipe(gulp.dest('dist/'));
 
-  livereload.listen({port: 3002});
+  // livereload.listen({port: 3002});
   gulp.watch(['./src/*.html', './src/css/*.css'], ['html']);
   gulp.watch('./src/css/*.scss', ['sass']);
 });
