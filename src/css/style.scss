@@ -11,9 +11,11 @@
 
 h1,h2,h3,h4,h5,h6 {margin: 0;}
 ul,li{margin: 0; padding: 0;}
+html {height: 100%;}
 body {
 	font-family: "微软雅黑", "Microsoft-Yahei", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Helvetica";
 	position: relative;
+	height: 100%;
 }
 i{font-style: normal;}
 
@@ -25,20 +27,21 @@ $txt_color_grey: #636363; //主list偏灰色
 	position: fixed;
 	width: 100%;
 	top: 0;
-	height: 0;
+	height: 100%;
 		$bgcolor: #7dba57;
 	//大导航
 	.nav_bar {
 		position: absolute;
 		width: 100%;
+		padding-top: 20px;
 		background-color: $bgcolor;
 		height: $height;
 		padding: 10px auto;
 		h2 {
 			font-weight: normal;
-			font-size: 22px;
+			font-size: 21px;
 			position: absolute;
-			@include abs-middle(-33px, -11px);
+			@include abs-middle(-33px, -4px);
 			color: $txt_color;
 			height: 30px;
 		}
@@ -57,7 +60,13 @@ $txt_color_grey: #636363; //主list偏灰色
 		}
 	}
 	//大导航下部分
-	ul.nav_bar_more {height: 50px; display: table; width: 100%; text-align: center;}
+	ul.nav_bar_more {
+		height: 50px; 
+		display: table; 
+		width: 100%; 
+		text-align: center;
+		z-index: 1;
+	}
 	.nav_bar_more {
 		position: absolute;
 		top: 100%;
@@ -67,10 +76,16 @@ $txt_color_grey: #636363; //主list偏灰色
 	}
 	//记一笔钱
 	section.account_addone {
+		z-index: 2;
+		background: #fff;
 		position: absolute;
 		top: 0;
 		width: 100%;
-		nav.nav_bar {background: #f8f8f8;}
+		height: 100%;
+		nav.nav_bar {
+			background: #E9FBE0;
+			padding-top: 20px;
+		}
 		nav.nav_bar h2,nav.nav_bar a.icon_close {color: #8b8b8b;}
 		a {
 			&.icon {color: $txt_color;}
@@ -100,41 +115,70 @@ $txt_color_grey: #636363; //主list偏灰色
 			&.icon_publish {right: 0;}
 		}
 		.account_list {
-			margin-top: $height;
+			margin-top: 86px;
+			padding: 0 10px;
 			.account_list_icon {
 				color: $txt_color_grey;
 				display: inline-block;
 				margin: 10px;
 				i {
+					color: #A2A2A2;
 					width: 100%;
-					font-size: 16px;
+					font-size: 14px;
 					display: block;
 					text-align: center;
-					margin-top: 2px;
+					margin-top: 8px;
 				}
 			}
 			span.icon {
 				border-radius: 60px;
 				display: block;
-				width: 60px;
-				height: 60px;
-				font-size: 30px;
-				line-height: 60px;
+				width: 50px;
+				height: 50px;
+				font-size: 22px;
+				line-height: 50px;
 				color: #fff;
 				text-align: center;
 			}
 			hr {
-				margin: 0 6px;
-				color: #d8d8d8;
+				margin: 6px;
+				color: #EFEFEF;
 				border: none;
 				border-top: solid 1px;
+			}
+		}
+		.account_input {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			.input_show {
+				display: table;
+				width: 100%;
+				.icon {
+					display: table-cell;
+					color: #fe8887;
+					font-size: 28px;
+				}
+				padding-left: 15px;
+				color: #818181;
+				line-height: 51px;
+				background: #f8f8f8;
+				border-top: 1px solid #DEDEDE;
+				i, span.input_mount {
+					display: table-cell;
+					height: 51px;
+					vertical-align: middle;
+				}
+				.input_mount:before{
+					content: "¥ ";
+				}
 			}
 		}
 	}
 }
 
 #container {
-	margin-top: $height;
+	margin-top: 80px;
 	ul {
 		li:nth-child(2n+1) {background: #f2f2f2;}
 		li {
@@ -143,11 +187,11 @@ $txt_color_grey: #636363; //主list偏灰色
 			display: table;
 			padding-top: 10px;
 			padding-bottom: 10px;
-			border-bottom: 1px dashed #abbeae;
+			border-bottom: 1px solid #F1F1F1;
 			span {
 				display: table-cell;
 				vertical-align: middle;
-				font-size: 22px;
+				font-size: 18px;
 				display: inline-block;
 				&.icon {
 					margin-left: 20px;
@@ -163,6 +207,28 @@ $txt_color_grey: #636363; //主list偏灰色
 				}
 			}
 		}
+		.account_item {
+				transition: ease-in-out 250ms;
+				position: relative;
+				.account_edit.icon {
+					position: absolute;
+					top: 0;
+					left: 100%;
+					height: 100%;
+					background: #D84F3E;
+					line-height: 59px;
+					text-align: center;
+					font-size: 24px;
+					color: #fff;
+					width: 130px;
+					border-bottom: 1px solid #D84F3E;
+					i {
+						display: inline-block;
+						width: 60px;
+						margin-left: -1px;
+					}
+				}
+			}
 	}
 }
 
@@ -193,7 +259,7 @@ $txt_color_grey: #636363; //主list偏灰色
 	display: block;
 	width: 100%;
 	overflow: hidden;
-	background: #eee;
+	background: #f8f8f8;
 	color: #818181;
 	i {
 		float: left;
@@ -203,6 +269,12 @@ $txt_color_grey: #636363; //主list偏灰色
 		height: 50px;
 		line-height: 50px;
 		text-align: center;
-		border: 1px solid #ccc;
+		border-top: 1px solid #DEDEDE;
+		border-left: 1px solid #DEDEDE;
 	}
+}
+
+//向左滑动的类
+.swipeLeft {
+	transform: translate3d(-130px, 0, 0);
 }

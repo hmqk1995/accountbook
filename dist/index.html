@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta content="yes" name="apple-mobile-web-app-capable" />
-	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" />
 	<meta content="telephone=no" name="format-detection" />
 	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
@@ -14,9 +14,9 @@
 	<div id="main_container">
 		<nav class="nav_bar">
 			<h2>记帐本</h2>
-			<a class="icon icon_list" href="#">&#xe607;</a>
-			<a class="icon icon_edit" href="#">&#xe609;</a>
-			<ul class="nav_bar_more" style="display:none;">
+			<a class="icon icon_list" href="#" id="home_option">&#xe607;</a>
+			<a class="icon icon_edit" href="#" id="home_add">&#xe609;</a>
+			<ul class="nav_bar_more" style="display:none;" id="nav_bar">
 				<li>帐目列表</li>
 				<li>帐目统计</li>
 				<li>帐目图表</li>
@@ -29,6 +29,10 @@
 						<span class="icon icon_green">&#xe613;</span>
 						<span class="account_item_txt">收入</span>
 						<span class="count add"><i class="icon">&#xe602;</i>766.50</span>
+						<div class="account_edit icon">
+							<i>&#xe611;</i>
+							<i>&#xe610;</i>
+						</div>
 					</li>
 					<li class="account_item">
 						<span class="icon icon_orange">&#xe615;</span>
@@ -39,10 +43,10 @@
 			</section>
 		</div>
 
-		<section class="account_addone">
+		<section class="account_addone" id="add_page" style="display:none;">
 			<nav class="nav_bar">
 				<h2>记一笔</h2>
-				<a class="icon icon_close" href="#">&#xe600;</a>
+				<a class="icon icon_close" href="#" id="add_close">&#xe600;</a>
 				<a class="icon icon_publish" href="#"><i>发布</i></a>
 			</nav>
 			<section class="account_list">
@@ -60,10 +64,11 @@
 					<i>交通</i>
 				</div>
 			</section>
-			<section class="account_input">
+			<section class="account_input" id="account_input">
 				<div class="input_show">
-					<span class="icon icon_pink">&#xe612;<i>衣服</i></span>
-					<span class="input_mount">¥ 776.50</span>
+					<span class="icon">&#xe612;</span>
+					<i>衣服</i>
+					<span class="input_mount" id="input_mount">776.50</span>
 				</div>
 				<div class="calculator">
 					<i>1</i>
@@ -86,5 +91,7 @@
 			</section>
 		</section>
 	</div>
+	<script type="text/javascript" src="zepto.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
 </body>
 </html>

@@ -1,2 +1,3 @@
-.sass-cache/*
-icomoon/*
+.sass-cache/
+icomoon/
+.DS_Store

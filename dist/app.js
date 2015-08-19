@@ -1,1 +1,1 @@
-console.log("Hello World!");
+"use strict";$(function(){console.log("Hello World!");var o=$("#add_page"),n=$(".account_list .account_item");$("body")[0].addEventListener("touchmove",function(o){o.preventDefault()}),$("#home_add").on("tap",function(){o.css("display","block")}),$("#home_option").on("tap",function(){$("#nav_bar").toggle()}),$("#add_close").on("tap",function(){o.css("display","none")}),n.on("swipeLeft",function(){$(this).addClass("swipeLeft")}),n.on("swipeRight",function(){$(this).removeClass("swipeLeft")})});
