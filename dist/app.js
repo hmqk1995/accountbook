@@ -12,7 +12,7 @@ $('body')[0].addEventListener('touchmove', function(e){
 
 // 首页－记一笔按钮
 $('#home_add').on('tap', function(){
-	$addPage.css('display','block');
+	$addPage.show().addClass('pageLeft');
 });
 
 // 首页－选项按钮
@@ -22,7 +22,7 @@ $('#home_option').on('tap', function(){
 
 // 添加页－关闭按钮
 $('#add_close').on('tap', function(){
-	$addPage.css('display', 'none');
+	$addPage.css('display', 'none').removeClass('pageLeft');
 });
 
 // 首页－每个帐目item
@@ -31,6 +31,10 @@ $accountItems.on('swipeLeft', function(){
 });
 $accountItems.on('swipeRight', function(){
 	$(this).removeClass('swipeLeft');
+});
+// 首页－向左滑动删除按钮
+$('.button_delete').on('tap', function(){
+	$(this).parent().parent().hide();
 });
 
 /****
@@ -42,12 +46,15 @@ function Calculator(){
 	var inputMount = document.getElementById('input_mount');
 	inputMount.innerHTML = '0';
 
-	this.val1          = 0;
-	this.val2          = 0;
+	this.amount        = 0;
+	this.number        = 0;
+	this.calButtonOn   = false;
 	this.isCalculating = false;
 }
 
 Calculator.prototype.inputNumber = function(number) {
+	this.calButtonOn   = false;
+	
 	var $html = $amount.html();
 	if ($html[0][0] === '0') {
 		$html = '';
@@ -55,30 +62,39 @@ Calculator.prototype.inputNumber = function(number) {
 	// 如果之前没有按过求值键
 	if(this.isCalculating === false) {
 		$amount.html($html + number);
+		this.number = +$amount.html();
 		return;
 	} else if(this.isCalculating === true){
-		this.val1 = $html;
 		$amount.html(number);
+		this.number = +$amount.html();
 		this.isCalculating = false;
+		return;
 	}
 };
 
 Calculator.prototype.add = function() {
-	this.val2 = this.val1;
-	console.log(this.val2, this.val1);
-	this.isCalculating = true;
-	// 先执行之前的求值
-
-	// 将之前输入的数字保存到一个变量
-	this.val1 = $amount.html() + this.val2;
-	console.log(calculator);
-	// 输入数字
+	if(this.calButtonOn === false) {
+		this.isCalculating = true;
+		// 将之前输入的数字保存到一个变量
+		this.amount = +$amount.html() + this.amount;
+		$amount.html(this.amount);
+	}
+	
+	this.calButtonOn   = true;
 };
 
-Calculator.prototype.euqal = function() {
-	//求值
+Calculator.prototype.equal = function() {
+	// 求值
 }
 
+Calculator.prototype.reset = function() {
+	// 清零
+	this.amount        = 0;
+	this.number        = 0;
+	this.calButtonOn   = false;
+	this.isCalculating = false;
+	$amount.html(this.amount);
+}
 
 // 新的对象实例
 var calculator = new Calculator();
@@ -96,18 +112,116 @@ $cPanelChildren.map(function(){
 	// 取出标签中html内容并转换为字符串
 	var html = $(this).html() + '';
 	if (html !== '+' && html !== '-' && html !== 'x' && html !== '.' && html !== 'C' && html !== '='){
+
+		// 按数字键
 		$(this).on('tap', function(){
 			calculator.inputNumber(html);
+			console.log(calculator);
 		});
+
 	} else if (html === '+'){
+
+		// 按加号
 		$(this).on('tap', function(){
 			calculator.add();
+			// 显示数字
 			console.log('added');
+			console.log(calculator);
+		});
+
+	} else if (html === 'C'){
+
+		// 按清零
+		$(this).on('tap', function(){
+			calculator.reset();
+		});
+
+	} else if (html === '='){
+
+		// 按等于号
+		$(this).on('tap', function(){
+			calculator.equal();
+			console.log(calculator);
 		});
 	} else {
 		return false;
 	}
 });
+
+/***
+ *  项目增删查改
+ ***/
+
+ // 数据模版
+
+
+// <li class="account_item">
+// 	<span class="icon icon_green">&#xe613;</span>
+// 	<span class="account_item_txt">收入</span>
+// 	<span class="count add"><i class="icon">&#xe602;</i>766.50</span>
+// 	<div class="account_edit icon">
+// 		<i class="button_edit">&#xe611;</i>
+// 		<i class="button_delete">&#xe610;</i>
+// 	</div>
+// </li>
+
+// 数据
+ var accounts        = {};
+ accounts.storeLists = [
+ {
+ 	icon:   '&#xe613;',
+ 	color:  'icon_green',
+ 	text:   '收入',
+ 	type:   'add',
+ 	amount: '766.50',
+ },{
+ 	icon:   '&#xe613;',
+ 	color:  'icon_green',
+ 	text:   '收入',
+ 	type:   'minus',
+ 	amount: '766.50',
+ }];
+ accounts.add = function (storeLists) {
+ 	if (storeLists.type === 'add') {
+ 		var icon      = '&#xe602;',
+ 			iconClass = 'add';
+ 	} else {
+ 		var icon      = '&#xe603;',
+ 			iconClass = 'minus';
+ 	}
+
+ 	var str =	'<li class="account_item">' + 
+					'<span class="icon '+ storeLists.color + '">' + storeLists.icon + '</span>' +
+					'<span class="account_item_txt">' + storeLists.text + '</span>' +
+					'<span class="count '+ iconClass + '">' + 
+						'<i class="icon">' + icon + '</i>' + storeLists.amount + 
+					'</span>' +
+					'<div class="account_edit icon">' +
+						'\r<i class="button_edit">&#xe611;</i>' +
+						'\r<i class="button_delete">&#xe610;</i>' +
+					'\r</div>' +
+				'</li>';
+	return str;
+ }
+
+$('#add_publish').on('tap', function(){
+	var $ul = $('section.account_list ul');
+	$ul.append(accounts.add(accounts.storeLists[0]));
+	// 绑定事件
+	var $last = $ul.children().last();
+	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
+	console.log($deleteBtn);
+	$last.on('swipeLeft', function(){
+		$(this).addClass('swipeLeft');
+	});
+	$last.on('swipeRight', function(){
+		$(this).removeClass('swipeLeft');
+	});
+	$deleteBtn.on('tap', function(){
+		$(this).parent().parent().hide();
+	});
+});
+
 
 //END
 });

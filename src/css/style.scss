@@ -212,7 +212,7 @@ $txt_color_grey: #636363; //主list偏灰色
 			}
 		}
 		.account_item {
-				transition: ease-in-out 250ms;
+				transition: ease-in-out 120ms;
 				position: relative;
 				.account_edit.icon {
 					position: absolute;
@@ -232,6 +232,7 @@ $txt_color_grey: #636363; //主list偏灰色
 						margin-left: -1px;
 					}
 				}
+				
 			}
 	}
 }
@@ -281,4 +282,13 @@ $txt_color_grey: #636363; //主list偏灰色
 //向左滑动的类
 .swipeLeft {
 	transform: translate3d(-130px, 0, 0);
+}
+
+.pageLeft {
+	animation: pageLeft 0.2s ease-in-out;
+}
+
+@keyframes pageLeft {
+	0%   {transform: translate3d(100%, 0, 0)};
+	100% {transform: translate3d(0, 0, 0)};
 }

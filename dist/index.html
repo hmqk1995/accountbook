@@ -30,14 +30,18 @@
 						<span class="account_item_txt">收入</span>
 						<span class="count add"><i class="icon">&#xe602;</i>766.50</span>
 						<div class="account_edit icon">
-							<i>&#xe611;</i>
-							<i>&#xe610;</i>
+							<i class="button_edit">&#xe611;</i>
+							<i class="button_delete">&#xe610;</i>
 						</div>
 					</li>
 					<li class="account_item">
 						<span class="icon icon_orange">&#xe615;</span>
 						<span class="account_item_txt">衣服</span>
 						<span class="count minus"><i class="icon">&#xe603;</i>200.00</span>
+						<div class="account_edit icon">
+							<i class="button_edit">&#xe611;</i>
+							<i class="button_delete">&#xe610;</i>
+						</div>
 					</li>
 				</ul>
 			</section>
@@ -47,7 +51,7 @@
 			<nav class="nav_bar">
 				<h2>记一笔</h2>
 				<a class="icon icon_close" href="#" id="add_close">&#xe600;</a>
-				<a class="icon icon_publish" href="#"><i>发布</i></a>
+				<a class="icon icon_publish" href="#" id="add_publish"><i>发布</i></a>
 			</nav>
 			<section class="account_list">
 				<div class="account_list_icon">
@@ -65,7 +69,7 @@
 				</div>
 			</section>
 			<section class="account_input" id="account_input">
-				<div class="input_show">
+				<div class="input_show" id="input_show">
 					<span class="icon">&#xe612;</span>
 					<i>衣服</i>
 					<span class="input_mount" id="input_mount">776.50</span>
