@@ -158,14 +158,13 @@ $txt_color_grey: #636363; //主list偏灰色
 		}
 		.account_input {
 			position: absolute;
-			bottom: 0;
+			bottom: -183px;
 			width: 100%;
 			.input_show {
 				display: table;
 				width: 100%;
 				.icon {
 					display: table-cell;
-					color: #fe8887;
 					font-size: 28px;
 				}
 				padding-left: 15px;
@@ -280,8 +279,8 @@ $txt_color_grey: #636363; //主list偏灰色
 		display: inline-block;
 		margin-left: -2px;
 		width: 25%;
-		height: 50px;
-		line-height: 50px;
+		height: 45px;
+	    line-height: 45px;
 		text-align: center;
 		border-top: 1px solid #DEDEDE;
 		border-left: 1px solid #DEDEDE;
@@ -313,4 +312,9 @@ $txt_color_grey: #636363; //主list偏灰色
 }
 .opacity1 {
 	opacity: 1;
+}
+
+
+.panelToTop {
+	transform: translate3d(0, -183px, 0);
 }

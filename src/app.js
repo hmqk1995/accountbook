@@ -51,7 +51,7 @@ $('#add_account_list').on('tap', function(e){
 	console.log(e.target.tagName.toLowerCase());
 	if (e.target.className.indexOf('icon ') > -1 || e.target.tagName.toLowerCase() === 'i') {
 		var $this = $(e.target).parent(),
-			$i    = $('#account_input i'),
+			$i    = $('#account_input #input_show i'),
 			$icon = $('#account_input .icon'),
 			color = $this.children('.icon').css('background').split(' none')[0];
 
@@ -62,9 +62,12 @@ $('#add_account_list').on('tap', function(e){
 		$i.html($this.children('i').html());
 		$icon.html($this.children('.icon').html());
 		$icon.css('color', color);
+
+		$('#account_input').removeClass('easein').addClass('panelToTop easeout');
 		return;
 	}
 	e.preventDefault();
+	$('#account_input').addClass('easein').removeClass('panelToTop easeout');
 	return;
 });
 
