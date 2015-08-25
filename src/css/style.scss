@@ -16,6 +16,8 @@ body {
 	font-family: "Microsoft Yahei", "Lucida Grande", "Hiragino Sans GB", "Hiragino Sans GB W3", "Helvetica";
 	position: relative;
 	height: 100%;
+	-webkit-touch-callout: none !important;
+	-webkit-user-select: none !important;
 }
 i{font-style: normal;}
 

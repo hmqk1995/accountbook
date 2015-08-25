@@ -72,7 +72,10 @@ $('#add_publish').on('tap', function(){
 
 //  计算器按钮效果
 $('#calculator i').on('touchstart', function() {
-	$(this).css({'background':'#818181', 'color':'#f8f8f8'});
+	$(this).css({
+		'background':'#818181',
+		'color':'#f8f8f8'
+	});
 });
 
 $('#calculator i').on('touchend', function() {
