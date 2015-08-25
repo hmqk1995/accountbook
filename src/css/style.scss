@@ -127,6 +127,9 @@ $txt_color_grey: #636363; //主list偏灰色
 				color: $txt_color_grey;
 				display: inline-block;
 				margin: 10px;
+				@media (min-width: 321px) {
+					margin: 14px;
+				}
 				i {
 					color: #000;
 					width: 100%;
@@ -253,6 +256,7 @@ $txt_color_grey: #636363; //主list偏灰色
 	&.icon_blue   {background: #6fb2de;}
 	&.icon_red    {background: #d9594b;}
 	&.icon_brown  {background: #c6b29c;}
+	&.icon_yellow {background: #FDC300;}
 }
 
 //收入类
@@ -271,6 +275,7 @@ $txt_color_grey: #636363; //主list偏灰色
 	background: #f8f8f8;
 	color: #818181;
 	i {
+		font-size: 1.2rem;
 		float: left;
 		display: inline-block;
 		margin-left: -2px;

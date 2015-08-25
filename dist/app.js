@@ -46,6 +46,28 @@ $('#add_close').on('tap', function(){
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
 });
 
+// 添加页－每一个收入／支出选项按钮
+$('#add_account_list').on('tap', function(e){
+	console.log(e.target.tagName.toLowerCase());
+	if (e.target.className.indexOf('icon ') > -1 || e.target.tagName.toLowerCase() === 'i') {
+		var $this = $(e.target).parent(),
+			$i    = $('#account_input i'),
+			$icon = $('#account_input .icon'),
+			color = $this.children('.icon').css('background').split(' none')[0];
+
+		console.log($(e.target));
+		console.log($this);
+		console.log($this.children('i').html());
+
+		$i.html($this.children('i').html());
+		$icon.html($this.children('.icon').html());
+		$icon.css('color', color);
+		return;
+	}
+	e.preventDefault();
+	return;
+});
+
 // 添加页－发布按钮
 $('#add_publish').on('tap', function(){
 	var $ul = $('section.account_list ul');
