@@ -12,25 +12,33 @@ $('body')[0].addEventListener('touchmove', function(e){
 
 // 首页－记一笔按钮
 $('#home_add').on('tap', function(){
-	$addPage.show().addClass('pageLeft');
+	$addPage.removeClass('easein2').addClass('pageLeft easeout2');
 });
 
 // 首页－选项按钮
 $('#home_option').on('tap', function(){
-	$('#nav_bar').toggle();
+	var $navbar = $('#nav_bar');
+	if ($navbar.css('display') === 'none') { 
+		$navbar.show().css('opacity','1');
+		return;
+	}
+	$navbar.css('opacity','0');
+	setTimeout(function(){
+		$navbar.hide();
+	}, 120);
 })
 
 // 添加页－关闭按钮
 $('#add_close').on('tap', function(){
-	$addPage.css('display', 'none').removeClass('pageLeft');
+	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
 });
 
 // 首页－每个帐目item
 $accountItems.on('swipeLeft', function(){
-	$(this).addClass('swipeLeft');
+	$(this).removeClass('easein').addClass('swipeLeft easeout');
 });
 $accountItems.on('swipeRight', function(){
-	$(this).removeClass('swipeLeft');
+	$(this).addClass('easein').removeClass('swipeLeft easeout');
 });
 // 首页－向左滑动删除按钮
 $('.button_delete').on('tap', function(){
