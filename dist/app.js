@@ -28,11 +28,6 @@ $('#home_option').on('tap', function(){
 	}, 120);
 })
 
-// 添加页－关闭按钮
-$('#add_close').on('tap', function(){
-	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
-});
-
 // 首页－每个帐目item
 $accountItems.on('swipeLeft', function(){
 	$(this).removeClass('easein').addClass('swipeLeft easeout');
@@ -40,14 +35,49 @@ $accountItems.on('swipeLeft', function(){
 $accountItems.on('swipeRight', function(){
 	$(this).addClass('easein').removeClass('swipeLeft easeout');
 });
+
 // 首页－向左滑动删除按钮
 $('.button_delete').on('tap', function(){
 	$(this).parent().parent().hide();
 });
 
+// 添加页－关闭按钮
+$('#add_close').on('tap', function(){
+	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
+});
+
+// 添加页－发布按钮
+$('#add_publish').on('tap', function(){
+	var $ul = $('section.account_list ul');
+	$ul.append(accounts.add(accounts.storeLists[0]));
+	// 绑定事件
+	var $last = $ul.children().last();
+	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
+	console.log($deleteBtn);
+	$last.on('swipeLeft', function(){
+		$(this).removeClass('easein').addClass('swipeLeft easeout');
+	});
+	$last.on('swipeRight', function(){
+		$(this).addClass('easein').removeClass('swipeLeft easeout');
+	});
+	$deleteBtn.on('tap', function(){
+		$(this).parent().parent().hide();
+	});
+	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
+});
+
 /****
  *  计算器
  ***/
+
+//  计算器按钮效果
+$('#calculator i').on('touchstart', function() {
+	$(this).css({'background':'#818181', 'color':'#f8f8f8'});
+});
+
+$('#calculator i').on('touchend', function() {
+	$(this).removeAttr('style');
+});
 
 function Calculator(){
 	// 初始化金额数为0
@@ -211,24 +241,6 @@ $cPanelChildren.map(function(){
 				'</li>';
 	return str;
  }
-
-$('#add_publish').on('tap', function(){
-	var $ul = $('section.account_list ul');
-	$ul.append(accounts.add(accounts.storeLists[0]));
-	// 绑定事件
-	var $last = $ul.children().last();
-	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
-	console.log($deleteBtn);
-	$last.on('swipeLeft', function(){
-		$(this).addClass('swipeLeft');
-	});
-	$last.on('swipeRight', function(){
-		$(this).removeClass('swipeLeft');
-	});
-	$deleteBtn.on('tap', function(){
-		$(this).parent().parent().hide();
-	});
-});
 
 
 //END
