@@ -3,7 +3,8 @@ $(function(){
 //START
 
 var $addPage = $('#add_page'),
-	$accountItems = $('.account_list .account_item');
+	$accountItems = $('.account_list .account_item'),
+	colorClass = 'icon_blue';	// 获取添加的对象的颜色类 用于添加页－每一个收入／支出选项按钮
 
 // 禁用默认滑动
 $('body')[0].addEventListener('touchmove', function(e){
@@ -49,22 +50,26 @@ $('#add_close').on('tap', function(){
 // 添加页－每一个收入／支出选项按钮
 $('#add_account_list').on('tap', function(e){
 	console.log(e.target.tagName.toLowerCase());
+
 	if (e.target.className.indexOf('icon ') > -1 || e.target.tagName.toLowerCase() === 'i') {
 		var $this = $(e.target).parent(),
 			$i    = $('#account_input #input_show i'),
 			$icon = $('#account_input .icon'),
 			color = $this.children('.icon').css('background').split(' none')[0];
 
-		console.log($(e.target));
-		console.log($this);
+		colorClass = $this.children('.icon')[0].className.split(' ')[1];
+
+		console.log('$(e.target)', $(e.target));
+		console.log('$this', $this);
 		console.log($this.children('i').html());
+		console.log('colorClass', colorClass);
 
 		$i.html($this.children('i').html());
 		$icon.html($this.children('.icon').html());
 		$icon.css('color', color);
 
 		$('#account_input').removeClass('easein').addClass('panelToTop easeout');
-		return;
+		return colorClass;
 	}
 	e.preventDefault();
 	$('#account_input').addClass('easein').removeClass('panelToTop easeout');
@@ -73,8 +78,25 @@ $('#add_account_list').on('tap', function(e){
 
 // 添加页－发布按钮
 $('#add_publish').on('tap', function(){
-	var $ul = $('section.account_list ul');
-	$ul.append(accounts.add(accounts.storeLists[0]));
+
+	var $ul = $('section.account_list ul'),
+		icon = $('#input_show .icon').html(),
+		text = $('#input_show i').html(),
+		amount = ($('#input_mount').html() - 0).toFixed(2),
+		type = (text !== '收入') ? 'minus' : 'add',
+		color = colorClass;
+
+	var storeList = {
+	 	icon:   icon,
+	 	color:  color,
+	 	text:   text,
+	 	type:   type,
+	 	amount: amount
+ 	};
+
+ 	accounts.storeLists.push(storeList);
+
+	$ul.append(accounts.add(accounts.storeLists[accounts.storeLists.length - 1]));
 	// 绑定事件
 	var $last = $ul.children().last();
 	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
@@ -89,6 +111,7 @@ $('#add_publish').on('tap', function(){
 		$(this).parent().parent().hide();
 	});
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
+
 });
 
 /****
@@ -239,16 +262,16 @@ $cPanelChildren.map(function(){
  	color:  'icon_green',
  	text:   '收入',
  	type:   'add',
- 	amount: '766.50',
+ 	amount: '766.50'
  },{
  	icon:   '&#xe613;',
  	color:  'icon_green',
  	text:   '收入',
  	type:   'minus',
- 	amount: '766.50',
+ 	amount: '766.50'
  }];
- accounts.add = function (storeLists) {
- 	if (storeLists.type === 'add') {
+ accounts.add = function (storeList) {
+ 	if (storeList.type === 'add') {
  		var icon      = '&#xe602;',
  			iconClass = 'add';
  	} else {
@@ -257,16 +280,20 @@ $cPanelChildren.map(function(){
  	}
 
  	var str =	'<li class="account_item">' + 
-					'<span class="icon '+ storeLists.color + '">' + storeLists.icon + '</span>' +
-					'<span class="account_item_txt">' + storeLists.text + '</span>' +
+					'<span class="icon '+ storeList.color + '">' + storeList.icon + '</span>' +
+					'<span class="account_item_txt">' + storeList.text + '</span>' +
 					'<span class="count '+ iconClass + '">' + 
-						'<i class="icon">' + icon + '</i>' + storeLists.amount + 
+						'<i class="icon">' + icon + '</i>' + storeList.amount + 
 					'</span>' +
 					'<div class="account_edit icon">' +
 						'\r<i class="button_edit">&#xe611;</i>' +
 						'\r<i class="button_delete">&#xe610;</i>' +
 					'\r</div>' +
 				'</li>';
+
+
+	accounts.storeLists.push();
+	console.log(accounts.storeLists);
 	return str;
  }
 
