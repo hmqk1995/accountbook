@@ -204,6 +204,12 @@ Calculator.prototype = {
 	},
 	// 输入数字
 	input: function(input) {
+		// 等于号则清除面板数据
+		console.log(this._sign);
+		if (this._sign === '=') {
+			this.panel = 0;
+			this._sign = '+';
+		}
 		// 如果面板数字为0
 		if (this.panel === 0) {
 			if (input === '.') {
