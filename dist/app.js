@@ -251,7 +251,7 @@ Calculator.prototype = {
 var calculator = new Calculator();
 
 // 绑定计算器按钮事件
-$('.calculator i').click(function(e){
+$('.calculator i').on('tap', function(e){
 	// 目标元素
 	var target = e.target;
 	// 目标元素的值
