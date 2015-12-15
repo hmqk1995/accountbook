@@ -130,112 +130,95 @@ $('#calculator i').on('touchend', function() {
 	$(this).removeAttr('style');
 });
 
-function Calculator(){
-	// 初始化金额数为0
-	var inputMount = document.getElementById('input_mount');
-	inputMount.innerHTML = '0';
+/*  计算器对象(12月添加)
+ *
+ *
+ */
+function Calculator() {
+	// 当前面板视图
+	this.panel = 0;
+	// 数字模型1
+	this._num1 = 0;
+	// 数字模型2
+	this._num2 = 0;
+	// 计算状态
+	this._sign = '+';
+	// 前一次是否按下了计算符号键
+	this.isCaling = false;
 
-	this.amount        = 0;
-	this.number        = 0;
-	this.calButtonOn   = false;
-	this.isCalculating = false;
 }
 
-Calculator.prototype.inputNumber = function(number) {
-	this.calButtonOn   = false;
-	
-	var $html = $amount.html();
-	if ($html[0][0] === '0') {
-		$html = '';
+//  计算方法
+//  doCal('计算符号(=-/*)', 数字)
+Calculator.prototype = {
+	// 做运算
+	doCal: function(sign, num) {
+		// 输入非法符号直接返回
+		if (sign !== '+' && sign !== '-' && sign !== '*' && sign !== '=') return;
+		// 没有启动计算状态时
+		if (isCaling === false) {
+			// 将当前视图数字保存到模型1
+			this._num1 = parseFloat(this.panel);
+			// 将当前计算符号保存到计算状态
+			this._sign = sign;
+			// 返回
+			return this.panel;
+		}
+		// 启动了运算状态时
+		if (isCaling === true) {
+			// 将当前视图数字保存到模型2
+			this._num2 = parseFloat(this.panel);
+			// 完成上一次的运算(现在的面板视图数字与之前保存的数字进行运算，同时保存这一次输入的运算符号)
+			// 加法
+			if (this._sign === '+') {
+				this.panel = this._num1 + this._num2;
+			}
+			// 减法
+			if (this._sign === '-') {
+				this.panel = this._num1 - this._num2;
+			}
+			// 乘法
+			if (this._sign === '*') {
+				this.panel = this._num1 * this._num2;
+			}
+			// 更新为现在的运算状态
+			this._sign = sign;
+			// 返回最新视图数据
+			return this.panel;
+		}
+	},
+	// 重置计算器
+	reset: function() {
+		// 状态清零
+		this.panel = 0;
+		this._num1 = 0;
+		this._num2 = 0;
+		this._sign = '+';
+		this.isCaling = false;
+	},
+	// 输入数字
+	input: function(input){
+		// 如果面板数字为0
+		if (this.panel === 0) {
+			this.panel += input;
+		// 如果已经输入了数字
+		} else {
+			if (input === '.') {
+			//如果输入为小数点
+				// 如果输入过小数点
+				if (this.panel.indexOf('.') > -1) {
+					return;
+				} else {
+				// 如果没输入过
+					this.panel += '.';
+				}
+			} else {
+			// 如果输入不是小数点
+				this.panel += input.toString();
+			}
+		}
 	}
-	// 如果之前没有按过求值键
-	if(this.isCalculating === false) {
-		$amount.html($html + number);
-		this.number = +$amount.html();
-		return;
-	} else if(this.isCalculating === true){
-		$amount.html(number);
-		this.number = +$amount.html();
-		this.isCalculating = false;
-		return;
-	}
-};
-
-Calculator.prototype.add = function() {
-	if(this.calButtonOn === false) {
-		this.isCalculating = true;
-		// 将之前输入的数字保存到一个变量
-		this.amount = +$amount.html() + this.amount;
-		$amount.html(this.amount);
-	}
-	
-	this.calButtonOn   = true;
-};
-
-Calculator.prototype.equal = function() {
-	// 求值
 }
-
-Calculator.prototype.reset = function() {
-	// 清零
-	this.amount        = 0;
-	this.number        = 0;
-	this.calButtonOn   = false;
-	this.isCalculating = false;
-	$amount.html(this.amount);
-}
-
-// 新的对象实例
-var calculator = new Calculator();
-
-// 获取显示器
-var $amount = $('#input_mount');
-
-// 获取计算器面板
-var $cPanel = $('.calculator');
-
-// 给按钮绑定事件
-var $cPanelChildren = $cPanel.children();
-$cPanelChildren.map(function(){
-
-	// 取出标签中html内容并转换为字符串
-	var html = $(this).html() + '';
-	if (html !== '+' && html !== '-' && html !== 'x' && html !== '.' && html !== 'C' && html !== '='){
-
-		// 按数字键
-		$(this).on('tap', function(){
-			calculator.inputNumber(html);
-			console.log(calculator);
-		});
-
-	} else if (html === '+'){
-
-		// 按加号
-		$(this).on('tap', function(){
-			calculator.add();
-			// 显示数字
-			console.log('added');
-			console.log(calculator);
-		});
-
-	} else if (html === 'C'){
-
-		// 按清零
-		$(this).on('tap', function(){
-			calculator.reset();
-		});
-
-	} else if (html === '='){
-
-		// 按等于号
-		$(this).on('tap', function(){
-			calculator.equal();
-			console.log(calculator);
-		});
-	} else {
-		return false;
-	}
-});
 
 /***
  *  项目增删查改
