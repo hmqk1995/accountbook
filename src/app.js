@@ -156,16 +156,19 @@ Calculator.prototype = {
 		// 输入非法符号直接返回
 		if (sign !== '+' && sign !== '-' && sign !== 'x' && sign !== '=') return;
 		// 没有启动计算状态时
-		if (isCaling === false) {
+		if (this.isCaling === false) {
 			// 将当前视图数字保存到模型1
 			this._num1 = parseFloat(this.panel);
 			// 将当前计算符号保存到计算状态
 			this._sign = sign;
+			// 开启运算状态
+			this.isCaling = true;
+			this.panel = 0;
 			// 返回
 			return this.panel;
 		}
 		// 启动了运算状态时
-		if (isCaling === true) {
+		if (this.isCaling === true) {
 			// 将当前视图数字保存到模型2
 			this._num2 = parseFloat(this.panel);
 			// 完成上一次的运算(现在的面板视图数字与之前保存的数字进行运算，同时保存这一次输入的运算符号)
@@ -183,6 +186,9 @@ Calculator.prototype = {
 			}
 			// 更新为现在的运算状态
 			this._sign = sign;
+			// 关闭运算状态
+			this._num1 = parseFloat(this.panel);
+			// this.panel = 0;
 			// 返回最新视图数据
 			return this.panel;
 		}
@@ -198,6 +204,7 @@ Calculator.prototype = {
 	},
 	// 输入数字
 	input: function(input) {
+
 		// 如果面板数字为0
 		if (this.panel === 0) {
 			if (input === '.') {
@@ -225,6 +232,13 @@ Calculator.prototype = {
 	// 显示面板
 	showPanel: function() {
 		return this.panel;
+	},
+	// 等于
+	equal: function() {
+		this.doCal('=');
+		this.isCaling = false;
+		this.panel = this._num1;
+		return this._num1;
 	}
 }
 
@@ -237,18 +251,18 @@ $('.calculator i').click(function(e){
 	// 目标元素的值
 	var val = target.innerHTML.toString();
 
-	console.log(calculator, val);
-
 	if (val === 'C') {
 		calculator.reset();
-		$('#input_mount').html(calculator.showPanel());
-		return;
 	}
-	if (val === 'x' && val === '+' && val === '-' && val === '=') {
+	if (val === 'x' || val === '+' || val === '-') {
 		calculator.doCal(val);
-	} else {
+	} else if (val === '=') {
+		calculator.equal();
+	} else if (val !== 'C') {
 		calculator.input(val);
 	}
+	$('#input_mount').html(calculator.showPanel());
+	console.log(calculator, val);
 });
 
 /***
