@@ -188,7 +188,7 @@ Calculator.prototype = {
 			this._sign = sign;
 			// 关闭运算状态
 			this._num1 = parseFloat(this.panel);
-			// this.panel = 0;
+			this.panel = 0;
 			// 返回最新视图数据
 			return this.panel;
 		}
@@ -204,7 +204,6 @@ Calculator.prototype = {
 	},
 	// 输入数字
 	input: function(input) {
-
 		// 如果面板数字为0
 		if (this.panel === 0) {
 			if (input === '.') {
@@ -216,12 +215,13 @@ Calculator.prototype = {
 		} else {
 			if (input === '.') {
 			//如果输入为小数点
+
 				// 如果输入过小数点
-				if (this.panel.indexOf('.') > -1) {
+				if (this.panel.toString().indexOf('.') > -1) {
 					return;
 				} else {
 				// 如果没输入过
-					this.panel += '.';
+					this.panel += input;
 				}
 			} else {
 			// 如果输入不是小数点
