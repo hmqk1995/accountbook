@@ -149,12 +149,12 @@ function Calculator() {
 }
 
 //  计算方法
-//  doCal('计算符号(=-/*)', 数字)
+//  doCal('计算符号(=-/*)')
 Calculator.prototype = {
 	// 做运算
-	doCal: function(sign, num) {
+	doCal: function(sign) {
 		// 输入非法符号直接返回
-		if (sign !== '+' && sign !== '-' && sign !== '*' && sign !== '=') return;
+		if (sign !== '+' && sign !== '-' && sign !== 'x' && sign !== '=') return;
 		// 没有启动计算状态时
 		if (isCaling === false) {
 			// 将当前视图数字保存到模型1
@@ -178,7 +178,7 @@ Calculator.prototype = {
 				this.panel = this._num1 - this._num2;
 			}
 			// 乘法
-			if (this._sign === '*') {
+			if (this._sign === 'x') {
 				this.panel = this._num1 * this._num2;
 			}
 			// 更新为现在的运算状态
@@ -197,10 +197,14 @@ Calculator.prototype = {
 		this.isCaling = false;
 	},
 	// 输入数字
-	input: function(input){
+	input: function(input) {
 		// 如果面板数字为0
 		if (this.panel === 0) {
-			this.panel += input;
+			if (input === '.') {
+				this.panel += input;
+			} else {
+				this.panel += parseFloat(input);
+			}
 		// 如果已经输入了数字
 		} else {
 			if (input === '.') {
@@ -217,8 +221,35 @@ Calculator.prototype = {
 				this.panel += input.toString();
 			}
 		}
+	},
+	// 显示面板
+	showPanel: function() {
+		return this.panel;
 	}
 }
+
+var calculator = new Calculator();
+
+// 绑定计算器按钮事件
+$('.calculator i').click(function(e){
+	// 目标元素
+	var target = e.target;
+	// 目标元素的值
+	var val = target.innerHTML.toString();
+
+	console.log(calculator, val);
+
+	if (val === 'C') {
+		calculator.reset();
+		$('#input_mount').html(calculator.showPanel());
+		return;
+	}
+	if (val === 'x' && val === '+' && val === '-' && val === '=') {
+		calculator.doCal(val);
+	} else {
+		calculator.input(val);
+	}
+});
 
 /***
  *  项目增删查改
