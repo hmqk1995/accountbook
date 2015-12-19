@@ -29,19 +29,6 @@ $('#home_option').on('tap', function(){
 	}, 120);
 })
 
-// 首页－每个帐目item
-$accountItems.on('swipeLeft', function(){
-	$(this).removeClass('easein').addClass('swipeLeft easeout');
-});
-$accountItems.on('swipeRight', function(){
-	$(this).addClass('easein').removeClass('swipeLeft easeout');
-});
-
-// 首页－向左滑动删除按钮
-$('.button_delete').on('tap', function(){
-	$(this).parent().parent().hide();
-});
-
 // 添加页－关闭按钮
 $('#add_close').on('tap', function(){
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
@@ -372,11 +359,36 @@ Controller.prototype = {
 	},
 	// 绑定事件（检测如果绑定过事件则不绑定，未绑定则绑定）
 	bindEvents: function() {
+	/* 初始化
+	 */
+		var $accountItems = $('.account_list .account_item');
 		
+	 	$accountItems.each(function(){
+
+	 		if ($(this).attr('data-isBind') === 'true') return;
+
+			// 首页－每个帐目item
+			$(this).on('swipeLeft', function(e){
+				$(this).removeClass('easein').addClass('swipeLeft easeout');
+			});
+			$(this).on('swipeRight', function(e){
+				$(this).addClass('easein').removeClass('swipeLeft easeout');
+			});
+			// 删除按钮
+			$(this).children('.account_edit').children('.button_delete').on('tap', function(){
+				$(this).parent().parent().hide();
+			});
+		 	// 绑定事件属性为真
+			$(this).attr('data-isBind', 'true');
+
+	 	});
 	}
 };
 
 var controller = new Controller();
+// 初始化渲染列表页
 controller.renderLists(accounts);
+// 初始化绑定事件
+controller.bindEvents();
 //END
 });
