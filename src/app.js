@@ -78,14 +78,14 @@ $('#add_account_list').on('tap', function(e){
 
 // 添加页－发布按钮
 $('#add_publish').on('tap', function(){
-
+	// 从视图中获取模型信息
 	var $ul = $('section.account_list ul'),
 		icon = $('#input_show .icon').html(),
 		text = $('#input_show i').html(),
 		amount = ($('#input_mount').html() - 0).toFixed(2),
 		type = (text !== '收入') ? 'minus' : 'add',
 		color = colorClass;
-
+	// 得到模型对象
 	var storeList = {
 	 	icon:   icon,
 	 	color:  color,
@@ -93,10 +93,15 @@ $('#add_publish').on('tap', function(){
 	 	type:   type,
 	 	amount: amount
  	};
+ 	// 推入模型
+ 	accounts.add(storeList);
+ 	// 得到该项
+ 	var item = accounts.getLastItem();
+ 	// 生成html字符串
+ 	var str = accounts.makeHtml(item);
+ 	// 将字符串插入到视图
+	$ul.append(str);
 
- 	accounts.storeLists.push(storeList);
-
-	$ul.append(accounts.add(accounts.storeLists[accounts.storeLists.length - 1]));
 	// 绑定事件
 	var $last = $ul.children().last();
 	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
@@ -272,7 +277,7 @@ $('.calculator i').on('tap', function(e){
 });
 
 /***
- *  项目增删查改
+ *  数据模型
  ***/
 
  // 数据模版
@@ -289,47 +294,56 @@ $('.calculator i').on('tap', function(e){
 // </li>
 
 // 数据
- var accounts        = {};
- accounts.storeLists = [
- {
- 	icon:   '&#xe613;',
- 	color:  'icon_green',
- 	text:   '收入',
- 	type:   'add',
- 	amount: '766.50'
- },{
- 	icon:   '&#xe613;',
- 	color:  'icon_green',
- 	text:   '收入',
- 	type:   'minus',
- 	amount: '766.50'
- }];
- accounts.add = function (storeList) {
- 	if (storeList.type === 'add') {
- 		var icon      = '&#xe602;',
- 			iconClass = 'add';
- 	} else {
- 		var icon      = '&#xe603;',
- 			iconClass = 'minus';
- 	}
+var accounts        = {};
+accounts.storeLists = [
+{
+	icon:   '&#xe613;',
+	color:  'icon_green',
+	text:   '收入',
+	type:   'add',
+	amount: '766.50'
+},{
+	icon:   '&#xe615;',
+	color:  'icon_orange',
+	text:   '生活',
+	type:   'minus',
+	amount: '200.00'
+}];
 
- 	var str =	'<li class="account_item">' + 
-					'<span class="icon '+ storeList.color + '">' + storeList.icon + '</span>' +
-					'<span class="account_item_txt">' + storeList.text + '</span>' +
-					'<span class="count '+ iconClass + '">' + 
-						'<i class="icon">' + icon + '</i>' + storeList.amount + 
-					'</span>' +
-					'<div class="account_edit icon">' +
-						'\r<i class="button_edit">&#xe611;</i>' +
-						'\r<i class="button_delete">&#xe610;</i>' +
-					'\r</div>' +
-				'</li>';
+// 插入html字符串
+accounts.makeHtml = function (storeList) {
+	if (storeList.type === 'add') {
+		var icon      = '&#xe602;',
+			iconClass = 'add';
+	} else {
+		var icon      = '&#xe603;',
+			iconClass = 'minus';
+	}
 
-
-	accounts.storeLists.push();
-	console.log(accounts.storeLists);
+	var str='<li class="account_item">' + 
+			'<span class="icon '+ storeList.color + '">' + storeList.icon + '</span>' +
+			'<span class="account_item_txt">' + storeList.text + '</span>' +
+			'<span class="count '+ iconClass + '">' + 
+				'<i class="icon">' + icon + '</i>' + storeList.amount + 
+			'</span>' +
+			'<div class="account_edit icon">' +
+				'\r<i class="button_edit">&#xe611;</i>' +
+				'\r<i class="button_delete">&#xe610;</i>' +
+			'\r</div>' +
+		'</li>';
 	return str;
- }
+};
+
+accounts.add = function (storeList) {
+	// 将数据推入模型
+	accounts.storeLists.push(storeList);
+	console.log(accounts.storeLists);
+};
+
+// 得到lists的最后一项
+accounts.getLastItem = function() {
+	return accounts.storeLists[accounts.storeLists.length - 1];
+};
 
 
 //END
