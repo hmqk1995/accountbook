@@ -344,7 +344,39 @@ accounts.add = function (storeList) {
 accounts.getLastItem = function() {
 	return accounts.storeLists[accounts.storeLists.length - 1];
 };
+// 得到lists
+accounts.getLists = function() {
+	return this.storeLists;
+};
 
+/*********
+ *  控制器
+ *********/
+function Controller () {
 
+};
+// 生成模型列表对应的html字符串
+Controller.prototype = {
+	renderLists: function(accounts) {
+		var lists = accounts.getLists();
+		var htmls = [];
+		// 循环处理每一项
+		for (var i = 0; i < lists.length; i++) {
+			htmls.push(accounts.makeHtml(lists[i]));
+		};
+		// 合并后插入到html
+		var $ul = $('section.account_list ul');
+		$ul.append(htmls.join(''));
+
+		console.log(htmls);
+	},
+	// 绑定事件（检测如果绑定过事件则不绑定，未绑定则绑定）
+	bindEvents: function() {
+		
+	}
+};
+
+var controller = new Controller();
+controller.renderLists(accounts);
 //END
 });
