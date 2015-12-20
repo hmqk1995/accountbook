@@ -4,6 +4,7 @@
   "description": "and I will make it done by 26th July ,2015",
   "main": "gulpfile.js",
   "dependencies": {
+    "chart.js": "^1.0.2",
     "connect": "^2.9.2",
     "express": "^4.13.3",
     "gulp": "^3.9.0",

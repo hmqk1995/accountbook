@@ -93,6 +93,13 @@
 				</div>
 			</section>
 		</section>
+		<section id="statistics" style="width:100%;height:100%;z-index:1001;position:absolute;top:0;">
+			<nav class="nav_bar">
+				<h2>账目图表</h2>
+				<a class="icon icon_close" href="#">&#xe600;</a>
+			</nav>
+			<canvas id="myChart" width="400" height="400"></canvas>
+		<section>
 	</div>
 	<script type="text/javascript" src="zepto.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
@@ -101,6 +108,31 @@
 		function loaded () {
 			var myScroll = new IScroll('#slide_list');
 		}
+	</script>
+	<script type="text/javascript" src="Chart.min.js"></script>
+	<script type="text/javascript">
+		// Get the context of the canvas element we want to select
+		var ctx = document.getElementById("myChart").getContext("2d");
+		var cData = {
+			labels : ["January","February","March","April","May","June","July"],
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,0.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : [65,59,90,81,56,55,40]
+				},
+				{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [28,48,40,19,96,27,100]
+				}
+			]
+		}
+		var myNewChart = new Chart(ctx).Line(cData);
 	</script>
 </body>
 </html>
