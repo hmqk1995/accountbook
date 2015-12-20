@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<title>account book</title>
 </head>
-<body>
+<body onload="loaded()">
 	<div id="main_container">
 		<nav class="nav_bar">
 			<h2>记帐本</h2>
@@ -23,7 +23,7 @@
 			</ul>
 		</nav>
 		<div id="container">
-			<section class="account_list">
+			<section class="account_list" id="slide_list">
 				<ul>
 					<!-- 内容列表区域 -->
 				</ul>
@@ -96,5 +96,11 @@
 	</div>
 	<script type="text/javascript" src="zepto.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="iscroll-lite-min.js"></script>
+	<script type="text/javascript">
+		function loaded () {
+			var myScroll = new IScroll('#slide_list');
+		}
+	</script>
 </body>
 </html>
