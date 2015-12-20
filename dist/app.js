@@ -32,7 +32,7 @@ $('#home_option').on('tap', function(){
 // 首页 - 帐目图表
 $('#tostatistic').on('tap', function(){
 	$('#nav_bar').css('opacity','0').hide();
-	$('#statistics').show();
+	$('#statistics').removeClass('easein2').addClass('pageLeft easeout2');
 	(function(){
 	// Get the context of the canvas element we want to select
 	var ctx = document.getElementById("distribute").getContext("2d");
@@ -61,7 +61,7 @@ $('#tostatistic').on('tap', function(){
 
 // 帐目图表－关闭按钮
 $('#statistics_close').on('tap', function(){
-	$('#statistics').hide();
+	$('#statistics').addClass('easein2').removeClass('pageLeft easeout2');
 });
 
 // 添加页－关闭按钮
