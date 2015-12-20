@@ -29,6 +29,41 @@ $('#home_option').on('tap', function(){
 	}, 120);
 })
 
+// 首页 - 帐目图表
+$('#tostatistic').on('tap', function(){
+	$('#nav_bar').css('opacity','0').hide();
+	$('#statistics').show();
+	(function(){
+	// Get the context of the canvas element we want to select
+	var ctx = document.getElementById("distribute").getContext("2d");
+	var cData = {
+		labels : ["生活","交通","食物","教育","住宿","其他"],
+		datasets : [
+			{
+				fillColor : "rgba(220,220,220,0.5)",
+				strokeColor : "rgba(220,220,220,1)",
+				pointColor : "rgba(220,220,220,1)",
+				pointStrokeColor : "#fff",
+				data : [65,59,90,81,56,55]
+			},
+			{
+				fillColor : "rgba(151,187,205,0.5)",
+				strokeColor : "rgba(151,187,205,1)",
+				pointColor : "rgba(151,187,205,1)",
+				pointStrokeColor : "#fff",
+				data : [28,48,40,19,96,27]
+			}
+		]
+	};
+	var myNewChart = new Chart(ctx).Radar(cData);		
+})();
+})
+
+// 帐目图表－关闭按钮
+$('#statistics_close').on('tap', function(){
+	$('#statistics').hide();
+});
+
 // 添加页－关闭按钮
 $('#add_close').on('tap', function(){
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');

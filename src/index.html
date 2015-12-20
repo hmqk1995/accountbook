@@ -19,7 +19,7 @@
 			<ul class="nav_bar_more" style="display:none;opacity:0;" id="nav_bar">
 				<li>帐目列表</li>
 				<li>帐目统计</li>
-				<li>帐目图表</li>
+				<li id="tostatistic">帐目图表</li>
 			</ul>
 		</nav>
 		<div id="container">
@@ -93,10 +93,10 @@
 				</div>
 			</section>
 		</section>
-		<section id="statistics" style="width:100%;height:100%;z-index:1001;position:absolute;top:0;">
+		<section id="statistics" style="width:100%;height:100%;z-index:1001;position:absolute;top:0;display:none;">
 			<nav class="nav_bar">
 				<h2>账目图表</h2>
-				<a class="icon icon_close" href="#">&#xe600;</a>
+				<a class="icon icon_close" id="statistics_close" href="#">&#xe600;</a>
 			</nav>
 			<section id="statistic_body">
 				<div id="statistic_info">
@@ -145,50 +145,5 @@
 		}
 	</script>
 	<script type="text/javascript" src="Chart.min.js"></script>
-	<script type="text/javascript">
-	(function(){
-		// Get the context of the canvas element we want to select
-		var ctx = document.getElementById("distribute").getContext("2d");
-		var cData = {
-			labels : ["生活","交通","食物","教育","住宿","其他"],
-			datasets : [
-				{
-					fillColor : "rgba(220,220,220,0.5)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
-					pointStrokeColor : "#fff",
-					data : [65,59,90,81,56,55]
-				},
-				{
-					fillColor : "rgba(151,187,205,0.5)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					data : [28,48,40,19,96,27,100]
-				}
-			]
-		};
-		var myNewChart = new Chart(ctx).Radar(cData);		
-	})();
-	(function(){
-		// Get the context of the canvas element we want to select
-		var ctx = document.getElementById("engel").getContext("2d");
-		var cData = [
-			{
-				value: 30,
-				color:"#F38630"
-			},
-			{
-				value : 50,
-				color : "#E0E4CC"
-			},
-			{
-				value : 100,
-				color : "#69D2E7"
-			}			
-		];
-		var myNewChart = new Chart(ctx).Doughnut(cData);
-	}());
-	</script>
 </body>
 </html>
