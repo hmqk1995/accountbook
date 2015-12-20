@@ -4,7 +4,7 @@ $(function(){
 
 var $addPage = $('#add_page'),
 	$accountItems = $('.account_list .account_item'),
-	colorClass = 'icon_blue';	// 获取添加的对象的颜色类 用于添加页－每一个收入／支出选项按钮
+	colorClass = 'icon_red';	// 获取添加的对象的颜色类 用于添加页－每一个收入／支出选项按钮
 
 // 禁用默认滑动
 $('body')[0].addEventListener('touchmove', function(e){
@@ -90,19 +90,13 @@ $('#add_publish').on('tap', function(){
 	$ul.append(str);
 
 	// 绑定事件
-	var $last = $ul.children().last();
-	var $deleteBtn = $last.children('.account_edit').children('.button_delete');
-	console.log($deleteBtn);
-	$last.on('swipeLeft', function(){
-		$(this).removeClass('easein').addClass('swipeLeft easeout');
-	});
-	$last.on('swipeRight', function(){
-		$(this).addClass('easein').removeClass('swipeLeft easeout');
-	});
-	$deleteBtn.on('tap', function(){
-		$(this).parent().parent().hide();
-	});
+	controller.bindEvents();
+
+	// 移除页面
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
+
+	// 更新localStorage
+	controller.setStorage();
 
 });
 
@@ -281,6 +275,14 @@ $('.calculator i').on('tap', function(e){
 // </li>
 
 // 数据
+// 数据格式
+// {
+// 	icon:   '&#xe615;',
+// 	color:  'icon_orange',
+// 	text:   '生活',
+// 	type:   'minus',
+// 	amount: '200.00'
+// }
 var accounts        = {};
 accounts.storeLists = [
 {
@@ -288,13 +290,7 @@ accounts.storeLists = [
 	color:  'icon_green',
 	text:   '收入',
 	type:   'add',
-	amount: '766.50'
-},{
-	icon:   '&#xe615;',
-	color:  'icon_orange',
-	text:   '生活',
-	type:   'minus',
-	amount: '200.00'
+	amount: '888.88'
 }];
 
 // 插入html字符串
@@ -344,6 +340,7 @@ function Controller () {
 };
 // 生成模型列表对应的html字符串
 Controller.prototype = {
+	// 渲染数据列表模板
 	renderLists: function(accounts) {
 		var lists = accounts.getLists();
 		var htmls = [];
@@ -362,7 +359,7 @@ Controller.prototype = {
 	/* 初始化
 	 */
 		var $accountItems = $('.account_list .account_item');
-		
+
 	 	$accountItems.each(function(){
 
 	 		if ($(this).attr('data-isBind') === 'true') return;
@@ -377,15 +374,32 @@ Controller.prototype = {
 			// 删除按钮
 			$(this).children('.account_edit').children('.button_delete').on('tap', function(){
 				$(this).parent().parent().hide();
+				console.log($(this));
 			});
 		 	// 绑定事件属性为真
 			$(this).attr('data-isBind', 'true');
 
 	 	});
+	},
+	// 设置到localStorage
+	setStorage: function() {
+		localStorage.data = JSON.stringify(accounts.storeLists);
+	},
+	// 从localStorage取回
+	fetchStorage: function() {
+		if(localStorage.data) {
+			accounts.storeLists = JSON.parse(localStorage.data);
+		}
 	}
 };
 
 var controller = new Controller();
+// 同步localStorage
+if(!localStorage.data) {
+	controller.setStorage();
+} else {
+	controller.fetchStorage();
+}
 // 初始化渲染列表页
 controller.renderLists(accounts);
 // 初始化绑定事件
