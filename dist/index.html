@@ -98,8 +98,43 @@
 				<h2>账目图表</h2>
 				<a class="icon icon_close" href="#">&#xe600;</a>
 			</nav>
-			<canvas id="myChart" width="400" height="400"></canvas>
-		<section>
+			<section id="statistic_body">
+				<div id="statistic_info">
+					<div>
+						<h2>总收入</h2>
+						<p class="income">2000.00</p>
+					</div>
+					<div>
+						<h2>总支出</h2>
+						<p class="spend">800.00</p>
+					</div>
+					<div>
+						<h2>总结余</h2>
+						<p class="left">1200.00</p>
+					</div>
+				</div>
+				<div id="statistic_distribute">
+					<canvas id="distribute" width="300" height="300"></canvas>
+					<section>
+						<h2>各项支出占比</h2>
+						<p>
+							<span style="color:#f39f61;">█ 生活</span>
+							<span style="color:#6fb2de;">█ 交通</span>
+							<span style="color:#d9594b;">█ 食物</span>
+							<span style="color:#fe8887;">█ 教育</span>
+							<span style="color:#c6b29c;">█ 住宿</span>
+							<span style="color:#FDC300;">█ 其他</span>
+						</p>
+					</section>
+				</div>
+				<div id="statistic_engel">
+					<!-- <canvas id="engel" width="200" height="200"></canvas> -->
+					<h2>恩格尔系数</h2>
+					<span>99%</span>
+					<em>(食品支出总额占个人消费支出总额的比重。59%以上为贫困)</em>
+				</div>
+			</section>
+		</section>
 	</div>
 	<script type="text/javascript" src="zepto.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
@@ -111,17 +146,18 @@
 	</script>
 	<script type="text/javascript" src="Chart.min.js"></script>
 	<script type="text/javascript">
+	(function(){
 		// Get the context of the canvas element we want to select
-		var ctx = document.getElementById("myChart").getContext("2d");
+		var ctx = document.getElementById("distribute").getContext("2d");
 		var cData = {
-			labels : ["January","February","March","April","May","June","July"],
+			labels : ["生活","交通","食物","教育","住宿","其他"],
 			datasets : [
 				{
 					fillColor : "rgba(220,220,220,0.5)",
 					strokeColor : "rgba(220,220,220,1)",
 					pointColor : "rgba(220,220,220,1)",
 					pointStrokeColor : "#fff",
-					data : [65,59,90,81,56,55,40]
+					data : [65,59,90,81,56,55]
 				},
 				{
 					fillColor : "rgba(151,187,205,0.5)",
@@ -131,8 +167,28 @@
 					data : [28,48,40,19,96,27,100]
 				}
 			]
-		}
-		var myNewChart = new Chart(ctx).Line(cData);
+		};
+		var myNewChart = new Chart(ctx).Radar(cData);		
+	})();
+	(function(){
+		// Get the context of the canvas element we want to select
+		var ctx = document.getElementById("engel").getContext("2d");
+		var cData = [
+			{
+				value: 30,
+				color:"#F38630"
+			},
+			{
+				value : 50,
+				color : "#E0E4CC"
+			},
+			{
+				value : 100,
+				color : "#69D2E7"
+			}			
+		];
+		var myNewChart = new Chart(ctx).Doughnut(cData);
+	}());
 	</script>
 </body>
 </html>
