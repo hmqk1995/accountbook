@@ -233,6 +233,13 @@ $txt_color_grey: #636363; //主list偏灰色
 		}
 		.account_item {
 				position: relative;
+				.account_time {
+				    position: absolute;
+				    right: 10px;
+				    bottom: 5px;
+				    color: #C3C3C3;
+				    font-size: 13px;
+				}
 				.account_edit.icon {
 					position: absolute;
 					top: 0;

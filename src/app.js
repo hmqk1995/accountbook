@@ -78,7 +78,8 @@ $('#add_publish').on('tap', function(){
 	 	color:  color,
 	 	text:   text,
 	 	type:   type,
-	 	amount: amount
+	 	amount: amount,
+	 	date: new Date().toISOString().split('T')[0]
  	};
  	// 推入模型
  	accounts.add(storeList);
@@ -290,7 +291,8 @@ accounts.storeLists = [
 	color:  'icon_green',
 	text:   '收入',
 	type:   'add',
-	amount: '888.88'
+	amount: '888.88',
+	date: new Date().toISOString().split('T')[0]
 }];
 
 // 插入html字符串
@@ -304,16 +306,17 @@ accounts.makeHtml = function (storeList) {
 	}
 
 	var str='<li class="account_item">' + 
-			'<span class="icon '+ storeList.color + '">' + storeList.icon + '</span>' +
-			'<span class="account_item_txt">' + storeList.text + '</span>' +
-			'<span class="count '+ iconClass + '">' + 
-				'<i class="icon">' + icon + '</i>' + storeList.amount + 
-			'</span>' +
-			'<div class="account_edit icon">' +
-				'\r<i class="button_edit">&#xe611;</i>' +
-				'\r<i class="button_delete">&#xe610;</i>' +
-			'\r</div>' +
-		'</li>';
+				'<span class="icon '+ storeList.color + '">' + storeList.icon + '</span>' +
+				'<span class="account_item_txt">' + storeList.text + '</span>' +
+				'<span class="count '+ iconClass + '">' + 
+					'<i class="icon">' + icon + '</i>' + storeList.amount + 
+				'</span>' +
+				'<div class="account_edit icon">' +
+					'\r<i class="button_edit">&#xe611;</i>' +
+					'\r<i class="button_delete">&#xe610;</i>' +
+				'\r</div>' + 
+				'<span class="account_time">' + storeList.date + '</span>' +
+			'</li>';
 	return str;
 };
 
