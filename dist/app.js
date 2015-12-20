@@ -359,8 +359,9 @@ Controller.prototype = {
 	/* 初始化
 	 */
 		var $accountItems = $('.account_list .account_item');
+		var lists = accounts.getLists();
 
-	 	$accountItems.each(function(){
+	 	$accountItems.each(function(index){
 
 	 		if ($(this).attr('data-isBind') === 'true') return;
 
@@ -374,7 +375,10 @@ Controller.prototype = {
 			// 删除按钮
 			$(this).children('.account_edit').children('.button_delete').on('tap', function(){
 				$(this).parent().parent().hide();
-				console.log($(this));
+				// 从模型中删除该项
+				lists.splice(index, 1);
+				controller.setStorage();
+				console.log(lists);
 			});
 		 	// 绑定事件属性为真
 			$(this).attr('data-isBind', 'true');
