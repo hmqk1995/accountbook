@@ -34,7 +34,7 @@ $txt_color_grey: #636363; //主list偏灰色
 		$bgcolor: #7dba57;
 	//大导航
 	.nav_bar {
-		z-index: 999;
+		z-index: 99;
 		position: absolute;
 		width: 100%;
 		padding-top: 20px;
@@ -82,7 +82,7 @@ $txt_color_grey: #636363; //主list偏灰色
 	//记一笔钱
 	section.account_addone {
 		
-		z-index: 2;
+		z-index: 1000;
 		background: #fff;
 		position: absolute;
 		top: 0;
