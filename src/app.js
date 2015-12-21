@@ -389,12 +389,12 @@ accounts.renderStatistic = function(data) {
 					pointColor : "rgba(151,187,205,1)",
 					pointStrokeColor : "#fff",
 					data : [
-						data.life,
-						data.transportation,
-						data.food,
-						data.education,
-						data.accomdation,
-						data.others
+						data.life / data.cost,
+						data.transportation / data.cost,
+						data.food / data.cost,
+						data.education / data.cost,
+						data.accomdation / data.cost,
+						data.others / data.cost
 					]
 				}
 			]
