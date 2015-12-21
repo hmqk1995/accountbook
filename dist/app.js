@@ -375,7 +375,7 @@ accounts.renderStatistic = function(data) {
 	$('#statistic_info .income').html(data.income.toFixed(2));
 	$('#statistic_info .spend').html(data.cost.toFixed(2));
 	$('#statistic_info .left').html((data.income - data.cost).toFixed(2));
-	$('#engel').html((data.cost === 0 ? 100 : (data.food / data.cost).toFixed(2)) + '%');
+	$('#engel').html((data.cost === 0 ? 100 : ((data.food / data.cost) * 100).toFixed(2)) + '%');
 
 	(function(){
 		// Get the context of the canvas element we want to select
