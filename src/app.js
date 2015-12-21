@@ -112,6 +112,9 @@ $('#add_publish').on('tap', function(){
 	// 移除页面
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
 
+	// 清空计算器
+	calculator.reset();
+
 	// 更新localStorage
 	controller.setStorage();
 
