@@ -112,11 +112,12 @@ $('#add_publish').on('tap', function(){
 	// 移除页面
 	$addPage.addClass('easein2').removeClass('pageLeft easeout2');
 
-	// 清空计算器
-	calculator.reset();
-
 	// 更新localStorage
 	controller.setStorage();
+
+	// 清空计算器
+	calculator.reset();
+	$('#input_mount').html(0);
 
 });
 
@@ -201,12 +202,13 @@ Calculator.prototype = {
 	},
 	// 重置计算器
 	reset: function() {
+		var _this = this;
 		// 状态清零
-		this.panel = 0;
-		this._num1 = 0;
-		this._num2 = 0;
-		this._sign = '+';
-		this.isCaling = false;
+		_this.panel = 0;
+		_this._num1 = 0;
+		_this._num2 = 0;
+		_this._sign = '+';
+		_this.isCaling = false;
 	},
 	// 输入数字
 	input: function(input) {
