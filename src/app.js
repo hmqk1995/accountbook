@@ -33,30 +33,11 @@ $('#home_option').on('tap', function(){
 $('#tostatistic').on('tap', function(){
 	$('#nav_bar').css('opacity','0').hide();
 	$('#statistics').removeClass('easein2').addClass('pageLeft easeout2');
-	(function(){
-	// Get the context of the canvas element we want to select
-	var ctx = document.getElementById("distribute").getContext("2d");
-	var cData = {
-		labels : ["生活","交通","食物","教育","住宿","其他"],
-		datasets : [
-			{
-				fillColor : "rgba(220,220,220,0.5)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				data : [65,59,90,81,56,55]
-			},
-			{
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,1)",
-				pointColor : "rgba(151,187,205,1)",
-				pointStrokeColor : "#fff",
-				data : [28,48,40,19,96,27]
-			}
-		]
-	};
-	var myNewChart = new Chart(ctx).Radar(cData);		
-})();
+
+	var data = controller.countData();
+	accounts.renderStatistic(data);
+	console.log(data);
+
 })
 
 // 帐目图表－关闭按钮
@@ -330,6 +311,26 @@ accounts.storeLists = [
 	date: new Date().toISOString().split('T')[0]
 }];
 
+// 统计页面数据模型
+accounts.data = {
+	// 总收入
+	income: 0,
+	// 总支出
+	cost: 0,
+	// 生活
+	life: 0,
+	// 交通
+	transportation: 0,
+	// 食物
+	food: 0,
+	// 教育
+	education: 0,
+	// 住宿
+	accomdation: 0,
+	// 其他
+	others: 0
+}
+
 // 插入html字符串
 accounts.makeHtml = function (storeList) {
 	if (storeList.type === 'add') {
@@ -369,6 +370,39 @@ accounts.getLastItem = function() {
 accounts.getLists = function() {
 	return this.storeLists;
 };
+// 渲染图表页
+accounts.renderStatistic = function(data) {
+	$('#statistic_info .income').html(data.income.toFixed(2));
+	$('#statistic_info .spend').html(data.cost.toFixed(2));
+	$('#statistic_info .left').html((data.income - data.cost).toFixed(2));
+	$('#engel').html((data.cost === 0 ? 100 : (data.food / data.cost).toFixed(2)) + '%');
+
+	(function(){
+		// Get the context of the canvas element we want to select
+		var ctx = document.getElementById('distribute').getContext('2d');
+		var cData = {
+			labels : ["生活","交通","食物","教育","住宿","其他"],
+			datasets : [
+				{
+					fillColor : "rgba(151,187,205,0.5)",
+					strokeColor : "rgba(151,187,205,1)",
+					pointColor : "rgba(151,187,205,1)",
+					pointStrokeColor : "#fff",
+					data : [
+						data.life,
+						data.transportation,
+						data.food,
+						data.education,
+						data.accomdation,
+						data.others
+					]
+				}
+			]
+		};
+		var myNewChart = new Chart(ctx);
+		myNewChart.Radar(cData);		
+	}());
+};
 
 /*********
  *  控制器
@@ -378,6 +412,44 @@ function Controller () {
 };
 // 生成模型列表对应的html字符串
 Controller.prototype = {
+	// 计算数据
+	countData: function() {
+		var data = accounts.data;
+		// 初始化
+		data.income 		= 0;
+		data.cost   		= 0;
+		data.life   		= 0;
+		data.transportation = 0;
+		data.food 			= 0;
+		data.education 		= 0;
+		data.accomdation 	= 0;
+		data.others 		= 0;
+		// map数据数组中所有数据，如果为type===add，把amount加入到income后return;否则如果type===minus，判断type后加入到对应的数据中
+		accounts.storeLists.map(function(item, index){
+			if (item.type === 'add') {
+				data.income += parseFloat(item.amount);
+				return;
+			}
+			if (item.type === 'minus') {
+				if (item.text === '生活') {
+					data.life           += parseFloat(item.amount);
+				} else if (item.text === '交通') {
+					data.transportation += parseFloat(item.amount);
+				} else if (item.text === '食物') {
+					data.food           += parseFloat(item.amount);
+				} else if (item.text === '教育') {
+					data.education      += parseFloat(item.amount);
+				} else if (item.text === '住宿') {
+					data.accomdation    += parseFloat(item.amount);
+				} else if (item.text === '其他') {
+					data.others         += parseFloat(item.amount);
+				}
+			}
+		});
+		// 总支出
+		data.cost = data.life + data.transportation + data.food + data.education + data.accomdation + data.others;
+		return data;
+	},
 	// 渲染数据列表模板
 	renderLists: function(accounts) {
 		var lists = accounts.getLists();
