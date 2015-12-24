@@ -30,7 +30,7 @@ $('#home_option').on('tap', function(){
 })
 
 // 首页 - 帐目图表
-$('#tostatistic').on('tap', function(){
+$('.tostatistic').on('tap', function(){
 	$('#nav_bar').css('opacity','0').hide();
 	$('#statistics').removeClass('easein2').addClass('pageLeft easeout2');
 
